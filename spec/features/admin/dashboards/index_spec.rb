@@ -20,5 +20,18 @@ describe 'admin index page' do
       end
     end
   
+    describe 'user story 21' do 
+      it 'displays the top 5 customers with the largest number of successful transactions' do 
+  
+        visit admin_path 
+
+        expect(page).to have_content("Top 5 Customers")
+        expect(page).to have_content()
+        expect(page).to have_content()
+        expect(page).to have_content()
+        expect(page).to have_content()
+        expect(page).to have_content()
+      end
+    end
   # end
 end  
