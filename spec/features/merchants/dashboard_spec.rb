@@ -11,7 +11,6 @@ RSpec.describe 'Merchant Dashboard', type: :feature  do
       # User story 1
       it "Then I see the name of my merchant " do
         visit merchant_dashboard_index_path(@merchant.id)
-        save_and_open_page
 
         expect(current_path).to eq("/merchant/#{@merchant.id}/dashboard")
         expect(page).to have_content(@merchant.name)
@@ -30,6 +29,14 @@ RSpec.describe 'Merchant Dashboard', type: :feature  do
         expect(page).to have_button("My Invoices")
         click_button "My Invoices"
         expect(current_path).to eq("/merchant/#{@merchant.id}/invoices")
+      end
+      #user story 3
+      it 'Then I see the names of the top 5 customers who have conducted the largest number of successful transactions with my merchant' do
+        visit merchant_dashboard_index_path(@merchant.id)
+       
+
+        expect(page).to have_content("My Favorite Customers")
+
       end
     end 
   end
