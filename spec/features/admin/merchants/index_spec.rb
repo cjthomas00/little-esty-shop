@@ -14,8 +14,24 @@ RSpec.describe "Admin Mercnahts Index" do
         expect(page).to have_content(@merchant_1.name)
         expect(page).to have_content(@merchant_2.name)
         expect(page).to have_content(@merchant_3.name)
+
+        expect(page).to have_link(@merchant_1.name)
+        expect(page).to have_link(@merchant_2.name)
+        expect(page).to have_link(@merchant_3.name)
       end
-      
+    end
+
+    it 'has links for each merchant name and can go to that merchants show page' do 
+      visit "/admin/merchants"
+       within(".merchant_names") do 
+
+        expect(page).to have_link(@merchant_1.name)
+        expect(page).to have_link(@merchant_2.name)
+        expect(page).to have_link(@merchant_3.name)
+ 
+        click_link(@merchant_1.name)
+        expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
+      end
     end
   end
 end
