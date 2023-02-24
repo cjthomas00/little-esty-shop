@@ -2,22 +2,25 @@ require 'rails_helper'
 
 RSpec.describe "Admin Mercnahts Index" do 
   before(:each) do 
-    @merchant_1 = Merchant.create!(name: "Joe Bob")
-    @merchant_2 = Merchant.create!(name: "Tim Smith")
-    @merchant_3 = Merchant.create!(name: "Jane Doe")
+    @merchant = FactoryBot.create_list(:merchant, 3)
+    # @item = FactoryBot.create_list(:item, 5)
+    # @customer = FactoryBot.create_list(:customer, 7)
+    # @invoice = FactoryBot.create_list(:invoice, 7)
+    # require 'pry'; binding.pry
   end
+     
   describe 'user story 24' do 
     it 'visits the /admin/merchants index and has the name of each merchant in the system' do 
       visit "/admin/merchants"
 
       within(".merchant_names") do 
-        expect(page).to have_content(@merchant_1.name)
-        expect(page).to have_content(@merchant_2.name)
-        expect(page).to have_content(@merchant_3.name)
+        expect(page).to have_content(@merchant[0].name)
+        expect(page).to have_content(@merchant[1].name)
+        expect(page).to have_content(@merchant[2].name)
 
-        expect(page).to have_link(@merchant_1.name)
-        expect(page).to have_link(@merchant_2.name)
-        expect(page).to have_link(@merchant_3.name)
+        expect(page).to have_link(@merchant[0].name)
+        expect(page).to have_link(@merchant[1].name)
+        expect(page).to have_link(@merchant[2].name)
       end
     end
 
@@ -25,12 +28,12 @@ RSpec.describe "Admin Mercnahts Index" do
       visit "/admin/merchants"
        within(".merchant_names") do 
 
-        expect(page).to have_link(@merchant_1.name)
-        expect(page).to have_link(@merchant_2.name)
-        expect(page).to have_link(@merchant_3.name)
+        expect(page).to have_link(@merchant[0].name)
+        expect(page).to have_link(@merchant[1].name)
+        expect(page).to have_link(@merchant[2].name)
  
-        click_link(@merchant_1.name)
-        expect(current_path).to eq("/admin/merchants/#{@merchant_1.id}")
+        click_link(@merchant[0].name)
+        expect(current_path).to eq("/admin/merchants/#{@merchant[0].id}")
       end
     end
   end
