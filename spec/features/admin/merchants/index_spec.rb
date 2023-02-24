@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.describe "Admin Mercnahts Index" do 
   before(:each) do 
     @merchant = FactoryBot.create_list(:merchant, 3)
+    # @item = FactoryBot.create_list(:item, 5)
+    # @customer = FactoryBot.create_list(:customer, 7)
+    # @invoice = FactoryBot.create_list(:invoice, 7)
+    # require 'pry'; binding.pry
   end
      
   describe 'user story 24' do 
