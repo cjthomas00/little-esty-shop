@@ -30,6 +30,14 @@ RSpec.describe 'Merchant Dashboard', type: :feature  do
         click_button "My Invoices"
         expect(current_path).to eq("/merchant/#{@merchant.id}/invoices")
       end
+      #user story 3
+      it 'Then I see the names of the top 5 customers who have conducted the largest number of successful transactions with my merchant' do
+        visit merchant_dashboard_index_path(@merchant.id)
+       
+
+        expect(page).to have_content("My Favorite Customers")
+
+      end
     end 
   end
 end
