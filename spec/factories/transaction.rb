@@ -3,6 +3,6 @@ FactoryBot.define do
     credit_card_number { Faker::Number.number(digits: 10).to_s }
     credit_card_expiration_date { nil }
     result { [0, 1].sample }
-    invoice 
+    association :invoice 
   end
 end

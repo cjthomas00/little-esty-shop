@@ -5,5 +5,5 @@ class InvoiceItem < ApplicationRecord
   has_one :merchant, through: :item
   has_one :customer, through: :invoice
 
-  enum status: ["pending", "packed", "shipped"]
+  enum status: ["pending", "packaged", "shipped"]
 end

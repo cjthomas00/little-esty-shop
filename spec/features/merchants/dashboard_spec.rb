@@ -36,7 +36,8 @@ RSpec.describe 'Merchant Dashboard', type: :feature  do
        
 
         expect(page).to have_content("My Favorite Customers")
-
+        expect(page).to have_content()
+        
       end
     end 
   end
