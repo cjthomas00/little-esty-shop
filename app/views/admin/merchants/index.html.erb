@@ -2,8 +2,12 @@
 
 <div class = "merchant_names">
   <% @merchants.each do |merchant| %>
-    <ul>
-      <li><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></li>
-    </ul>
+  <div id = "merchant_id<%=merchant.id%>"}>
+      <ul>
+        <li><%= link_to "#{merchant.name}", "/admin/merchants/#{merchant.id}" %></li>
+        <p> <%= button_to "Disable", admin_merchant_path(merchant.id), params: {status: "Disabled"}, method: :patch %>
+        <p>Status: <%= merchant.status %><p>
+      </ul>
+  </div>
   <% end %>
 </div>
