@@ -5,7 +5,8 @@ Rails.application.routes.draw do
     resources :dashboard, only: [:index]
   end
 
-  get '/admin', to: 'admin/dashboards#index'
+  resources :admin, controller: 'admin/dashboards', only: :index
+  # get '/admin', to: 'admin/dashboards#index'
 
   #/admin/merchants
 
