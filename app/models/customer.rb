@@ -4,13 +4,4 @@ class Customer < ApplicationRecord
   has_many :transactions, through: :invoices
   has_many :items, through: :invoice_items
   has_many :merchants, through: :items
-
-  def self.top_5_customers_with_success  
-    
-    select('customers.first_name, customers.last_name, count(transactions.id) as transaction_count').joins(:transactions).where(transactions: {result: 0}).group(:id).order('transaction_count desc').limit(5)
-  end
-
-  def name
-    first_name + " " + last_name
-  end
 end
