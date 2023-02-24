@@ -9,4 +9,8 @@ class Customer < ApplicationRecord
     
     select('customers.first_name, customers.last_name, count(transactions.id) as transaction_count').joins(:transactions).where(transactions: {result: 0}).group(:id).order('transaction_count desc').limit(5)
   end
+
+  def name
+    first_name + " " + last_name
+  end
 end

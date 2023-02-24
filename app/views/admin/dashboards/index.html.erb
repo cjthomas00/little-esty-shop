@@ -2,3 +2,9 @@
 
 <%= link_to "Admin Merchants", "/admins/merchants" %>
 <%= link_to "Admin Invoices", "/admins/invoices" %>
+
+<ol> 
+  <% @top_five_customers.each do |customer| %>
+    <li> <%= customer.name %></li>
+  <% end %>
+</ol>
