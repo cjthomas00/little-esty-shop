@@ -24,8 +24,10 @@
     <h2>Items Ready to Ship</h2>
     <ul>
     <%@items_ready_to_ship.each do |item|%>
-    <li><%= item.name %>: Invoice # <%= link_to item.inv_id, merchant_invoice_path(@merchant, item.inv_id) %></li>
-    <% end %>
-    </ul>
+    <div id= 'items_ready_to_ship-<%=item.id%>'>
+      <li><%= item.name %>: Invoice # <%= link_to item.inv_id,  merchant_invoice_path(@merchant, item.inv_id) %> Created At:   <%=item.date.strftime("%A, %B %d, %Y")%></li>
+      <% end %>
+      </ul>
+    </div>
   </div>
 </section>
