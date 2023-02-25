@@ -7,12 +7,25 @@
 </div>
 
 <section>
-  <div class = "top_5_customers">
+<div class = 'top_5_customers' >
   <h2>My Favorite Customers</h2>
     <ul>
     <%@merchant.top_5_customers_by_transaction.each do |customer|%>
-    <li><%= customer.first_name %> <% ' ' %> <%= customer.last_name %> <% ' ' %> <%= @merchant.successful_customer_transactions(customer.id) %></li>
-     <%end%>
+    <div id= 'top_5_customers-<%=customer.id%>'>
+      <li><%= customer.first_name %> <% ' ' %> <%= customer.last_name %> <% ' ' %>: <%= @merchant.successful_customer_transactions(customer.id) %></li>
+      <%end%>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class = "items_ready_to_ship">
+    <h2>Items Ready to Ship</h2>
+    <ul>
+    <%@items_ready_to_ship.each do |item|%>
+    <li><%= item.name %>: Invoice # <%= link_to item.inv_id, merchant_invoice_path(@merchant, item.inv_id) %></li>
+    <% end %>
     </ul>
   </div>
 </section>
