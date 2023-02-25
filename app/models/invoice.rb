@@ -7,6 +7,6 @@ class Invoice < ApplicationRecord
   enum status: ["completed", "in progress", "cancelled"]
 
   def self.incomplete_invoices
-    joins(:invoice_items).order(created_at: :asc).where.not(status: 'shipped' ).distinct
+    joins(:invoice_items).order(created_at: :asc).where.not(status: 2).distinct
   end
 end 
