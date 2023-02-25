@@ -140,5 +140,50 @@ describe 'admin index page' do
           expect(page).to_not have_link("#{@invoice14.id}")
         end  
       end
+
+    describe 'user story 23' do 
+      it 'displays a section for Incomplete Invoices' do 
+  
+        visit admin_path 
+        
+        expect(page).to have_content("Incomplete Invoices")
+        expect(@invoice7.created_at.strftime("%A, %B %d, %Y")).to appear_before(@invoice1.created_at.strftime("%A, %B %d, %Y"))
+      end
+
+      it 'shows beside each invoice id is the date that the invoice was created' do
+      
+        visit admin_path 
+
+        within('.incomplete_invoices') do
+          expect(page).to have_content("Invoice ##{@invoice1.id}")
+          expect(page).to have_content("Invoice ##{@invoice3.id}")
+          expect(page).to have_content("Invoice ##{@invoice5.id}")
+          expect(page).to have_content("Invoice ##{@invoice7.id}")
+          expect(page).to have_content("Invoice ##{@invoice9.id}")
+          expect(page).to have_content("Invoice ##{@invoice11.id}")
+          expect(page).to have_content("Invoice ##{@invoice2.id}")
+          expect(page).to_not have_content("Invoice ##{@invoice12.id}")
+          expect(page).to_not have_content("Invoice ##{@invoice13.id}")
+          expect(page).to_not have_content("Invoice ##{@invoice14.id}")
+        end  
+      end
+
+    
+      it 'shows the list is ordered from oldest to newest' do  
+        visit admin_path 
+
+        within('.incomplete_invoices') do
+          expect(page).to have_link("#{@invoice1.id}")
+          expect(page).to have_link("#{@invoice3.id}")
+          expect(page).to have_link("#{@invoice5.id}")
+          expect(page).to have_link("#{@invoice7.id}")
+          expect(page).to have_link("#{@invoice9.id}")
+          expect(page).to have_link("#{@invoice11.id}")
+          expect(page).to have_link("#{@invoice2.id}")
+          expect(page).to_not have_link("#{@invoice12.id}")
+          expect(page).to_not have_link("#{@invoice13.id}")
+          expect(page).to_not have_link("#{@invoice14.id}")
+        end  
+      end
   end
 end
