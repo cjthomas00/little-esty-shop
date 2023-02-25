@@ -15,7 +15,7 @@ RSpec.describe Item do
 
   describe '::methods' do
     before :each do
-      @merchant1 = Merchant.create!( name: "Dudes Habidashery")
+    @merchant1 = Merchant.create!( name: "Dudes Habidashery")
     @customer1 = Customer.create!( first_name: "Britney", last_name: "Johnson")
     @customer2 = Customer.create!( first_name: "Mike", last_name: "Smith")
     @customer3 = Customer.create!( first_name: "Brian", last_name: "Johnson")
