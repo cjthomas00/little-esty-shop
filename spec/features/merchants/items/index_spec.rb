@@ -33,6 +33,21 @@ RSpec.describe 'Merchant items index', type: :feature do
         expect(page).to have_no_content(@item9.name)
         expect(page).to have_no_content(@item10.name)
       end
+
+      #user story 7
+      it "When I click on the name of an item from the merchant items index page,
+      Then I am taken to that merchant's item's show page (/merchants/merchant_id/items/item_id)" do
+        expect(page).to have_link("#{@item1.name}")
+        expect(page).to have_link("#{@item2.name}")
+        expect(page).to have_link("#{@item3.name}")
+        expect(page).to have_link("#{@item4.name}")
+        expect(page).to have_link("#{@item5.name}")
+        expect(page).to have_no_link("#{@item6.name}")
+        expect(page).to have_no_link("#{@item7.name}")
+        expect(page).to have_no_link("#{@item8.name}")
+        expect(page).to have_no_link("#{@item9.name}")
+        expect(page).to have_no_link("#{@item10.name}")
+      end
     end
   end
 end
