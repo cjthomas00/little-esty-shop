@@ -3,8 +3,25 @@
 <%= link_to "Admin Merchants", "/admins/merchants" %>
 <%= link_to "Admin Invoices", "/admins/invoices" %>
 
-<ol> 
-  <% @top_five_customers.each do |customer| %>
-    <li> <%= customer.name %></li>
-  <% end %>
-</ol>
+<section>
+  <div class = "top_five_customers">
+  <h2>Top 5 Customers</h2>
+    <ul>
+    <% @top_five_customers.each do |customer| %>
+    <li><%= customer.first_name  %><% ' ' %> <%= customer.last_name %> <% ' - ' %><%= customer.top_successful_transactions %> </li>
+     <% end %>
+    </ul> 
+   </div> 
+ </section> 
+
+  <section>
+  <div class = "incomplete_invoices">
+  <h2>Incomplete Invoices</h2>
+    <ul>
+    <% @incomplete_invoices.each do |invoices| %>
+    <li>Invoice #<%= invoice.id  %><% ' - ' %> <%= invoice.created_at %> <%= link_to item.inv_id %> </li>
+     <% end %>
+    </ul> 
+   </div> 
+ </section> 
+
