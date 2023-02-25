@@ -20,9 +20,13 @@ RSpec.describe 'Merchant items index', type: :feature do
     describe "When I click on the name of an item from the merchant items index page, then I am taken to that merchant's item's show page (/merchants/merchant_id/items/item_id)" do
       it "And I see all of the item's attributes including: - Name - Description - Current Selling Price" do
         expect(current_path).to eq("/merchant/#{@merchant1.id}/items/#{@item1.id}")
+        
         expect(page).to have_content(@item1.name)
-        expect(page).to have_content(@item1.description)
-        expect(page).to have_content(@item1.unit_price)
+        expect(page).to have_content("Description - #{@item1.description}")
+        expect(page).to have_content("Current Selling Price - $#{@item1.unit_price}")
+        expect(page).to have_no_content(@item2.name)
+        expect(page).to have_no_content(@item2.description)
+        expect(page).to have_no_content(@item2.unit_price)
       end
     end
   end
