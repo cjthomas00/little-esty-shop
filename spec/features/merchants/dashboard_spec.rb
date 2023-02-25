@@ -21,11 +21,11 @@ RSpec.describe 'Merchant Dashboard', type: :feature  do
     @invoice9 = @customer5.invoices.create!( status: 1) 
     @invoice10 = @customer6.invoices.create!( status: 1) 
     @invoice11 = @customer6.invoices.create!( status: 1) 
-    @item1 = @merchant1.items.create!(name: "water bottle", description: "24oz metal container for water", unit_price: 8) 
-    @item2 = @merchant1.items.create!(name: "rubber duck", description: "toy for bath", unit_price: 1) 
-    @item3 = @merchant1.items.create!(name: "lamp", description: "12 inch desk lamp", unit_price: 16) 
-    @item4 = @merchant1.items.create!(name: "wireless mouse", description: "wireless computer mouse for mac", unit_price: 40) 
-    @item5 = @merchant1.items.create!(name: "chapstick", description: "coconut flavor chapstick", unit_price: 2) 
+    @item1 = @merchant1.items.create!(name: "Yeti bottle", description: "24oz metal container for water", unit_price: 48) 
+    @item2 = @merchant1.items.create!(name: "football", description: "toy for kids", unit_price: 45) 
+    @item3 = @merchant1.items.create!(name: "lamp shade", description: "12 inch desk lamp", unit_price: 18) 
+    @item4 = @merchant1.items.create!(name: "wireless keyboard", description: "wireless computer keyboard for mac", unit_price: 40) 
+    @item5 = @merchant1.items.create!(name: "chapstick", description: "original flavor chapstick", unit_price: 2) 
     @transaction1 = @invoice1.transactions.create!(  credit_card_number: 4654405418249632, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") 
     @transaction2 = @invoice2.transactions.create!(  credit_card_number: 4654405418249632, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") 
     @transaction3 = @invoice3.transactions.create!(  credit_card_number: 4140149827486249, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") 
@@ -41,48 +41,84 @@ RSpec.describe 'Merchant Dashboard', type: :feature  do
     @transaction11 = @invoice11.transactions.create!( credit_card_number: 4972246905754900, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") 
     InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 11, unit_price: @item1.unit_price, status: 1)
     InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice3.id, quantity: 12, unit_price: @item1.unit_price, status: 1)
-    InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice5.id, quantity: 21, unit_price: @item2.unit_price, status: 1)
+    InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice5.id, quantity: 21, unit_price: @item2.unit_price, status: 2)
     InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice7.id, quantity: 111, unit_price: @item3.unit_price, status: 1)
-    InvoiceItem.create!(item_id: @item4.id, invoice_id: @invoice9.id, quantity: 31, unit_price: @item4.unit_price, status: 1)
-    InvoiceItem.create!(item_id: @item5.id, invoice_id: @invoice11.id, quantity: 13, unit_price: @item1.unit_price, status: 1)
-    InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice2.id, quantity: 1, unit_price: @item2.unit_price, status: 1)
-    @merchant = Merchant.create!(name: "dude")
+    InvoiceItem.create!(item_id: @item4.id, invoice_id: @invoice9.id, quantity: 31, unit_price: @item4.unit_price, status: 0)
+    InvoiceItem.create!(item_id: @item5.id, invoice_id: @invoice11.id, quantity: 13, unit_price: @item1.unit_price, status: 0)
+    InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice2.id, quantity: 1, unit_price: @item2.unit_price, status: 2)
+    visit merchant_dashboard_index_path(@merchant1.id)
   end
 
   describe ' As a Merchant ' do 
     describe 'When I visit my merchant dashboard (/merchants/merchant_id/dashboard)' do
       # User story 1
       it "Then I see the name of my merchant " do
-        visit merchant_dashboard_index_path(@merchant.id)
-
-        expect(current_path).to eq("/merchant/#{@merchant.id}/dashboard")
-        expect(page).to have_content(@merchant.name)
+      
+        expect(current_path).to eq("/merchant/#{@merchant1.id}/dashboard")
+        expect(page).to have_content(@merchant1.name)
       end 
       # user story 2
       it "Then I see link to my merchant items index (/merchants/merchant_id/items)" do 
-        visit merchant_dashboard_index_path(@merchant.id)
-
+       
         expect(page).to have_button("My Items")
         click_button "My Items"
-        expect(current_path).to eq("/merchant/#{@merchant.id}/items")
+        expect(current_path).to eq("/merchant/#{@merchant1.id}/items")
       end
       it "And I see a link to my merchant invoices index (/merchants/merchant_id/invoices)" do
-        visit merchant_dashboard_index_path(@merchant.id)
 
         expect(page).to have_button("My Invoices")
         click_button "My Invoices"
-        expect(current_path).to eq("/merchant/#{@merchant.id}/invoices")
+        expect(current_path).to eq("/merchant/#{@merchant1.id}/invoices")
       end
       #user story 3
       it 'Then I see the names of the top 5 customers who have conducted the largest number of successful transactions with my merchant' do
-        visit merchant_dashboard_index_path(@merchant1.id)
   
         expect(page).to have_content("My Favorite Customers")
-        expect(page).to have_content("#{@customer1.first_name} #{@customer1.last_name} 2")
-        expect(page).to have_content("#{@customer2.first_name} #{@customer2.last_name} 1")
-        expect(page).to have_content("#{@customer3.first_name} #{@customer3.last_name} 1")
-        expect(page).to have_content("#{@customer5.first_name} #{@customer5.last_name} 1")
-        expect(page).to have_content("#{@customer6.first_name} #{@customer6.last_name} 1")
+
+        within "#top_5_customers-#{@customer1.id}" do
+          expect(@customer1.first_name).to appear_before(@customer1.last_name)
+          expect(@customer1.last_name).to appear_before(": 2")
+        end
+        within "#top_5_customers-#{@customer2.id}" do
+          expect(@customer2.first_name).to appear_before(@customer2.last_name)
+          expect(@customer2.last_name).to appear_before(": 1")
+        end
+
+        within "#top_5_customers-#{@customer3.id}" do
+          expect(@customer3.first_name).to appear_before(@customer3.last_name)
+          expect(@customer3.last_name).to appear_before(": 1")
+        end
+        within "#top_5_customers-#{@customer5.id}" do
+          expect(@customer5.first_name).to appear_before(@customer5.last_name)
+          expect(@customer5.last_name).to appear_before(": 1")
+        end
+        within "#top_5_customers-#{@customer6.id}" do
+          expect(@customer6.first_name).to appear_before(@customer6.last_name)
+          expect(@customer6.last_name).to appear_before(": 1")
+        end
+      end
+      #user story 4
+      describe "Then I see a section for 'Items Ready to Ship'" do 
+        it ' In that section I see a list of the names of all of my items that have been ordered and have not yet been shipped ' do
+                   
+          expect(page).to have_content("Items Ready to Ship")  
+          expect(page).to have_content("#{@item1.name}")
+          expect(page).to have_content("#{@item3.name}")
+          expect(page).to have_no_content("#{@item2.name}")
+          expect(page).to have_no_content("#{@item4.name}")
+          expect(page).to have_no_content("#{@item5.name}")
+        end
+        
+        it "and next to each Item I see the id of the invoice that ordered my item and each invoice id is a link to my merchants invoice show page'" do
+          
+          expect(page).to have_link("#{@invoice1.id}")
+          expect(page).to have_link("#{@invoice3.id}")
+          expect(page).to have_link("#{@invoice7.id}")
+          expect(page).to have_no_link("#{@invoice2.id}")
+          expect(page).to have_no_link("#{@invoice4.id}")
+          expect(page).to have_no_link("#{@invoice6.id}")
+          expect(page).to have_no_link("#{@invoice5.id}")
+        end
       end
     end 
   end
