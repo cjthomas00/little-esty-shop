@@ -47,6 +47,8 @@ RSpec.describe 'Merchant items index', type: :feature do
         expect(page).to have_no_link("#{@item8.name}")
         expect(page).to have_no_link("#{@item9.name}")
         expect(page).to have_no_link("#{@item10.name}")
+        click_link("#{@item1.name}") 
+        expect(current_path).to eq("/merchant/#{@merchant1.id}/items/#{@item1.id}")
       end
     end
   end
