@@ -14,7 +14,7 @@
   <div class = "enabled_merchants" >
     <h3> Enabled Merchants </h3>
     <% @merchants.enabled_merchants.each do |merchant| %>
-      <div id = <%= "enabled_merchant_id#{merchant.id}"%>>
+      <div id= <%= "enabled_merchant_id#{merchant.id}"%>>
         <ul>
          <li> <%= merchant.name %> </li> 
          <p>Status: <%= merchant.status %></p>
@@ -36,4 +36,6 @@
     </div>
     <% end %>
   </div>
+
+  <%= link_to "Create New Merchant", "/admin/merchants/new"%>
 </div>

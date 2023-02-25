@@ -5,7 +5,7 @@ class Merchant < ApplicationRecord
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
   
-  enum status: ["Enabled", "Disabled"]
+  enum status: ["Disabled", "Enabled"]
 
   def top_5_customers_by_transaction
     customers.joins(:transactions).where(transactions: {result: 'success'}).select("customers.*, count(DISTINCT transactions.id) as transactions_count").group("customers.id").order("transactions_count desc").limit(5)
@@ -16,10 +16,10 @@ class Merchant < ApplicationRecord
   end
   
   def self.enabled_merchants 
-    where(status: 0)
+    where(status: 1)
   end
 
   def self.disabled_merchants 
-    where(status: 1)
+    where(status: 0)
   end
 end

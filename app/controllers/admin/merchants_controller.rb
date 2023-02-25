@@ -7,6 +7,15 @@ class Admin::MerchantsController < ApplicationController
     @merchant = Merchant.find(params[:id])
   end
 
+  def new 
+    @merchant = Merchant.new
+  end
+
+  def create 
+    # require 'pry'; binding.pry
+    @merchant = Merchant.create!(new_merchant_attributes)
+  end
+
   def edit 
     @merchant = Merchant.find(params[:id])
   end
@@ -26,5 +35,9 @@ class Admin::MerchantsController < ApplicationController
   private 
   def update_merchant_attributes
     params.require(:merchant).permit(:name)
+  end
+
+  def new_merchant_attributes 
+    params.require(:merchant).permit(:name, :status)
   end
 end
