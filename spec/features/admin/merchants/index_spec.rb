@@ -3,9 +3,10 @@ require 'rails_helper'
 RSpec.describe "Admin Mercnahts Index" do 
   before(:each) do 
     @merchant = FactoryBot.create_list(:merchant, 3)
+    @merchant[0].update!(status: 1)
   end
      
-  describe 'user story 24' do 
+  describe 'admin merchants index' do 
     it 'visits the /admin/merchants index and has the name of each merchant in the system' do 
       visit "/admin/merchants"
 
@@ -33,10 +34,10 @@ RSpec.describe "Admin Mercnahts Index" do
       end
     end
 
-    it 'has a button to disable or enable the merchant' do 
+    it 'User Story 27 - has a button to disable or enable the merchant' do 
       visit "/admin/merchants" 
-
-      within("#enabled_merchant_id#{@merchant[0].id}") do 
+      
+      within "#enabled_merchant_id#{@merchant[0].id}" do
         expect(page).to have_button("Disable")
       end
     end
@@ -55,10 +56,10 @@ RSpec.describe "Admin Mercnahts Index" do
       end
     end
 
-    it 'has a section for disabled merchants and enabled merchants' do 
-      disabled_merchant = Merchant.create!(name: "Sock Store", status: 1)
-      enabled_merchant_1 = Merchant.create!(name: "Candy Store", status: 0)
-      enabled_merchant_2 = Merchant.create!(name: "Hat Store", status: 0)
+    it 'User Story 28 - has a section for disabled merchants and enabled merchants' do 
+      disabled_merchant = Merchant.create!(name: "Sock Store", status: 0)
+      enabled_merchant_1 = Merchant.create!(name: "Candy Store", status: 1)
+      enabled_merchant_2 = Merchant.create!(name: "Hat Store", status: 1)
 
       visit "admin/merchants"
 
@@ -79,6 +80,24 @@ RSpec.describe "Admin Mercnahts Index" do
         expect(page).to_not have_content(enabled_merchant_1.name)
         expect(page).to_not have_content(enabled_merchant_2.name)
       end
+    end
+  end
+
+  describe 'User Story 29' do 
+    it 'has a link to create a new merchant' do 
+      visit "/admin/merchants"
+
+      expect(page).to have_link("Create New Merchant")
+    end
+
+    it 'when clicks, goes to a new page to create a new merchant' do 
+      visit "/admin/merchants"
+
+      expect(page).to have_link("Create New Merchant") 
+
+      click_link("Create New Merchant")
+
+      expect(current_path).to eq("/admin/merchants/new")
     end
   end
 end
