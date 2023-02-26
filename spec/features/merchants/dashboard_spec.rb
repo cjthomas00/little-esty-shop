@@ -54,7 +54,7 @@ RSpec.describe 'Merchant Dashboard', type: :feature  do
       # User story 1
       it "Then I see the name of my merchant " do
       
-        expect(current_path).to eq("/merchant/#{@merchant1.id}/dashboard")
+        expect(current_path).to eq("/merchants/#{@merchant1.id}/dashboard")
         expect(page).to have_content(@merchant1.name)
       end 
       # user story 2
@@ -62,13 +62,13 @@ RSpec.describe 'Merchant Dashboard', type: :feature  do
        
         expect(page).to have_button("My Items")
         click_button "My Items"
-        expect(current_path).to eq("/merchant/#{@merchant1.id}/items")
+        expect(current_path).to eq("/merchants/#{@merchant1.id}/items")
       end
       it "And I see a link to my merchant invoices index (/merchants/merchant_id/invoices)" do
 
         expect(page).to have_button("My Invoices")
         click_button "My Invoices"
-        expect(current_path).to eq("/merchant/#{@merchant1.id}/invoices")
+        expect(current_path).to eq("/merchants/#{@merchant1.id}/invoices")
       end
       #user story 3
       it 'Then I see the names of the top 5 customers who have conducted the largest number of successful transactions with my merchant' do
