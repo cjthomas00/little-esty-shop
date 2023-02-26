@@ -1,1 +1,10 @@
 <%= render 'admin/dashboards/admin' %>
+
+<section>
+  <div class = "invoices_info">
+    <h2>Invoice #<%="#{@invoice.id}"%> </h2>
+      <p>Status: <%= @invoice.status.capitalize %></p><br>
+      <p>Created on: <%= @invoice.date %></p><br>
+      <p>Customer: <%= @invoice.customer_name %></p><br>
+    </div> 
+ </section> 

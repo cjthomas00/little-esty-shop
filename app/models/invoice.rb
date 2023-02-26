@@ -13,4 +13,12 @@ class Invoice < ApplicationRecord
   def date
     created_at.strftime("%A, %B %d, %Y")
   end
+
+  def customer_name
+    customer.name
+  end
+
+  # def status
+  #   invoice.status.capitalize
+  # end
 end 
