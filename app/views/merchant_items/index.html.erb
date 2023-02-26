@@ -1,5 +1,5 @@
 <h1><%= @merchant.name %>'s Items</h1>
-
+<nav><%= link_to "New Item", new_merchant_item_path(@merchant)%></nav>
 <div class = "enabled_items" >
     <h3> Enabled Items </h3>
     <% @items.enabled_items.each do |item| %>
