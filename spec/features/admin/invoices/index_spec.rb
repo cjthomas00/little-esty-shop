@@ -15,7 +15,7 @@ describe 'admin invoice index page' do
   describe 'user story 32' do
     it 'displays a list of all invoice ids in the system' do
       visit admin_invoices_path 
-      save_and_open_page
+      # save_and_open_page
       within(".invoices") do
         expect(page).to have_content("Invoice ##{@invoice[1].id}")
         expect(page).to have_content("Invoice ##{@invoice[2].id}")
