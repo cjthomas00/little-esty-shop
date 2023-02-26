@@ -147,13 +147,13 @@ describe 'admin index page' do
         visit admin_path 
 
         within('.incomplete_invoices') do
-          expect(page).to have_content("Invoice ##{@invoice7.id} Friday, February 17, 2023")
-          expect(page).to have_content("Invoice ##{@invoice1.id} Wednesday, February 22, 2023")
-          expect(page).to have_content("Invoice ##{@invoice2.id} Thursday, February 23, 2023")
-          expect(page).to have_content("Invoice ##{@invoice3.id} Friday, February 24, 2023")
-          expect(page).to have_content("Invoice ##{@invoice5.id} Friday, February 24, 2023")
-          expect(page).to have_content("Invoice ##{@invoice9.id} Friday, February 24, 2023")
-          expect(page).to have_content("Invoice ##{@invoice11.id} Friday, February 24, 2023")
+          expect(page).to have_content("Invoice ##{@invoice7.id} - Friday, February 17, 2023")
+          expect(page).to have_content("Invoice ##{@invoice1.id} - Wednesday, February 22, 2023")
+          expect(page).to have_content("Invoice ##{@invoice2.id} - Thursday, February 23, 2023")
+          expect(page).to have_content("Invoice ##{@invoice3.id} - Friday, February 24, 2023")
+          expect(page).to have_content("Invoice ##{@invoice5.id} - Friday, February 24, 2023")
+          expect(page).to have_content("Invoice ##{@invoice9.id} - Friday, February 24, 2023")
+          expect(page).to have_content("Invoice ##{@invoice11.id} - Friday, February 24, 2023")
           expect(page).to_not have_content("Invoice ##{@invoice12.id}")
           expect(page).to_not have_content("Invoice ##{@invoice13.id}")
           expect(page).to_not have_content("Invoice ##{@invoice14.id}")
