@@ -14,17 +14,14 @@ RSpec.describe 'Merchant Invoices Show Page' do
   # User Story 15
   describe "As a merchant," do
     describe "When I visit my merchant's invoice show page(/merchant/merchant_id/invoices/invoice_id)" do
-      it "Then I see the invoice id, status, and created_at date" do
+      it "Then I see the invoice id, status, and created_at date and I see the customer associated with the invoice" do
         visit merchant_invoice_path(@merchant1.id, @invoice1.id)
-        expect(page).to have_content(@invoice1.id)
-        expect(page).to have_content(@invoice1.status)
-        expect(page).to have_content(@invoice1.created_at.strftime("%A, %B %d, %Y"))
+        expect(page).to have_content("Invoice ##{@invoice1.id}")
+        expect(page).to have_content("Status: #{@invoice1.status}")
+        expect(page).to have_content("Created on: #{@invoice1.created_at.strftime("%A, %B %d, %Y")}")
+        expect(page).to have_content("Customer:")
+        expect(page).to have_content("#{@customer1.first_name + " " + @customer1.last_name}")
       end 
-
-      it " And I see the customer associated with the invoice" do
-        visit merchant_invoice_path(@merchant1.id, @invoice1.id)
-        expect(page).to have_content(@customer1.first_name + " " + @customer1.last_name)
-      end
     end 
   end 
 end 
