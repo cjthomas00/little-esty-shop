@@ -28,7 +28,7 @@ RSpec.describe 'Merchant Invoice index' do
           expect(page).to have_link(@invoice3.id)
           expect(page).to have_link(@invoice4.id)  
           click_link "#{@invoice1.id}"
-          expect(current_path).to eq(merchants_merchant_invoices_path(@merchant1, @invoice1.id))
+          expect(current_path).to eq(merchant_invoice_path(@merchant1, @invoice1.id))
         end
       end
     end
