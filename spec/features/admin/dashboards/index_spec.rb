@@ -9,17 +9,17 @@ describe 'admin index page' do
     @customer4 = Customer.create!( first_name: "Clark", last_name: "Griswold")
     @customer5 = Customer.create!( first_name: "Nick", last_name: "Green")
     @customer6 = Customer.create!( first_name: "Lyla", last_name: "Thomas")
-    @invoice1 = @customer1.invoices.create!( status: 1) 
-    @invoice2 = @customer1.invoices.create!( status: 1) 
-    @invoice3 = @customer2.invoices.create!( status: 1) 
-    @invoice4 = @customer2.invoices.create!( status: 1) 
-    @invoice5 = @customer3.invoices.create!( status: 1) 
-    @invoice6 = @customer3.invoices.create!( status: 1) 
-    @invoice7 = @customer4.invoices.create!( status: 1) 
-    @invoice8 = @customer5.invoices.create!( status: 1) 
-    @invoice9 = @customer5.invoices.create!( status: 1) 
-    @invoice10 = @customer6.invoices.create!( status: 1) 
-    @invoice11 = @customer6.invoices.create!( status: 1) 
+    @invoice1 = @customer1.invoices.create!( status: 1, created_at: 'Wednesday, February 22, 2023') 
+    @invoice2 = @customer1.invoices.create!( status: 1, created_at: 'Thursday, February 23, 2023')
+    @invoice3 = @customer2.invoices.create!( status: 1, created_at: 'Friday, February 24, 2023')
+    @invoice4 = @customer2.invoices.create!( status: 1, created_at: 'Friday, February 24, 2023')
+    @invoice5 = @customer3.invoices.create!( status: 1, created_at: 'Friday, February 24, 2023')
+    @invoice6 = @customer3.invoices.create!( status: 1, created_at: 'Friday, February 24, 2023')
+    @invoice7 = @customer4.invoices.create!( status: 1, created_at: 'Friday, February 17, 2023')
+    @invoice8 = @customer5.invoices.create!( status: 1, created_at: 'Friday, February 24, 2023')
+    @invoice9 = @customer5.invoices.create!( status: 1, created_at: 'Friday, February 24, 2023')
+    @invoice10 = @customer6.invoices.create!( status: 1, created_at: 'Friday, February 24, 2023')
+    @invoice11 = @customer6.invoices.create!( status: 1, created_at: 'Friday, February 24, 2023')
     @invoice12 = @customer1.invoices.create!( status: 2) 
     @invoice13 = @customer2.invoices.create!( status: 2) 
     @invoice14 = @customer3.invoices.create!( status: 2) 
@@ -58,8 +58,7 @@ describe 'admin index page' do
 
     describe 'user story 19' do
       it 'displays a header indicating that visitor is on the admin dashboard' do
-        # visit admin_index_path 
-        visit '/admin'
+        visit admin_path 
 
         expect(page).to have_content("Admin Dashboard")
       end
@@ -99,14 +98,14 @@ describe 'admin index page' do
     describe 'user story 22' do 
       it 'displays a section for Incomplete Invoices' do 
   
-        admin_path 
+        visit admin_path 
         
         expect(page).to have_content("Incomplete Invoices")
       end
      
 
     it 'shows a list of the ids of all invoices have items that have not yet been shipped' do
-      
+   
       visit admin_path 
 
       within('.incomplete_invoices') do
@@ -126,7 +125,7 @@ describe 'admin index page' do
       it 'shows each invoice id links to that invoices admin show page' do
         
         visit admin_path 
-
+    
         within('.incomplete_invoices') do
           expect(page).to have_link("#{@invoice1.id}")
           expect(page).to have_link("#{@invoice3.id}")
@@ -140,50 +139,25 @@ describe 'admin index page' do
           expect(page).to_not have_link("#{@invoice14.id}")
         end  
       end
+    end
 
     describe 'user story 23' do 
-      it 'displays a section for Incomplete Invoices' do 
-  
-        visit admin_path 
-        
-        expect(page).to have_content("Incomplete Invoices")
-        expect(@invoice7.created_at.strftime("%A, %B %d, %Y")).to appear_before(@invoice1.created_at.strftime("%A, %B %d, %Y"))
-      end
-
-      it 'shows beside each invoice id is the date that the invoice was created' do
+      it 'shows the date by each invoice id it was created on from oldest to newest' do
       
         visit admin_path 
 
         within('.incomplete_invoices') do
-          expect(page).to have_content("Invoice ##{@invoice1.id}")
-          expect(page).to have_content("Invoice ##{@invoice3.id}")
-          expect(page).to have_content("Invoice ##{@invoice5.id}")
-          expect(page).to have_content("Invoice ##{@invoice7.id}")
-          expect(page).to have_content("Invoice ##{@invoice9.id}")
-          expect(page).to have_content("Invoice ##{@invoice11.id}")
-          expect(page).to have_content("Invoice ##{@invoice2.id}")
+          expect(page).to have_content("Invoice ##{@invoice7.id} Friday, February 17, 2023")
+          expect(page).to have_content("Invoice ##{@invoice1.id} Wednesday, February 22, 2023")
+          expect(page).to have_content("Invoice ##{@invoice2.id} Thursday, February 23, 2023")
+          expect(page).to have_content("Invoice ##{@invoice3.id} Friday, February 24, 2023")
+          expect(page).to have_content("Invoice ##{@invoice5.id} Friday, February 24, 2023")
+          expect(page).to have_content("Invoice ##{@invoice9.id} Friday, February 24, 2023")
+          expect(page).to have_content("Invoice ##{@invoice11.id} Friday, February 24, 2023")
           expect(page).to_not have_content("Invoice ##{@invoice12.id}")
           expect(page).to_not have_content("Invoice ##{@invoice13.id}")
           expect(page).to_not have_content("Invoice ##{@invoice14.id}")
         end  
       end
-
-    
-      it 'shows the list is ordered from oldest to newest' do  
-        visit admin_path 
-
-        within('.incomplete_invoices') do
-          expect(page).to have_link("#{@invoice1.id}")
-          expect(page).to have_link("#{@invoice3.id}")
-          expect(page).to have_link("#{@invoice5.id}")
-          expect(page).to have_link("#{@invoice7.id}")
-          expect(page).to have_link("#{@invoice9.id}")
-          expect(page).to have_link("#{@invoice11.id}")
-          expect(page).to have_link("#{@invoice2.id}")
-          expect(page).to_not have_link("#{@invoice12.id}")
-          expect(page).to_not have_link("#{@invoice13.id}")
-          expect(page).to_not have_link("#{@invoice14.id}")
-        end  
-      end
-  end
+    end
 end

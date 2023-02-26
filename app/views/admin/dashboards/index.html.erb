@@ -9,7 +9,7 @@
     <ul>
     <% @top_five_customers.each do |customer| %>
     <div id= 'top_five_customers-<%=customer.id%>'>
-    <li><%= customer.first_name  %><% ' ' %> <%= customer.last_name %> <%= ' - ' %><%= customer.top_successful_transactions %> </li>
+    <li><%= customer.name %><%= ' - ' %><%= customer.top_successful_transactions %> </li>
      <% end %>
     </ul> 
    </div> 
@@ -20,7 +20,7 @@
   <h2>Incomplete Invoices</h2>
     <ul>
     <% @incomplete_invoices.each do |invoice| %>
-    <li>Invoice #<%= link_to invoice.id %></li> 
+    <li>Invoice #<%= link_to invoice.id %><%=' ' %><%= invoice.date %></li> 
      <% end %>
     </ul> 
    </div> 

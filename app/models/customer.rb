@@ -11,9 +11,9 @@ class Customer < ApplicationRecord
 
   def top_successful_transactions
     Transaction.where(result: 'success').count
+  end  
+
+  def name
+    first_name + " " + last_name
   end
 end  
-
-# def name
-#   first_name + " " + last_name
-# end
