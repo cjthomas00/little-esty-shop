@@ -90,5 +90,12 @@ RSpec.describe 'Merchant items index', type: :feature do
         end
       end
     end
+
+     #user story 11
+     describe "When I visit my items index page" do
+      it "I see a link to create a new item." do
+        expect(page).to have_link("New Item")
+      end
+    end
   end
 end
