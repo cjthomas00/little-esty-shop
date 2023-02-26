@@ -46,7 +46,7 @@ RSpec.describe 'Merchant Dashboard', type: :feature  do
     InvoiceItem.create!(item_id: @item4.id, invoice_id: @invoice9.id, quantity: 31, unit_price: @item4.unit_price, status: 0)
     InvoiceItem.create!(item_id: @item5.id, invoice_id: @invoice11.id, quantity: 13, unit_price: @item1.unit_price, status: 0)
     InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice2.id, quantity: 1, unit_price: @item2.unit_price, status: 2)
-    visit merchant_dashboard_index_path(@merchant1.id)
+    # visit merchant_dashboard_index_path(@merchant1.id)
   end
 
   describe ' As a Merchant ' do 
