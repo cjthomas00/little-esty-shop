@@ -3,6 +3,14 @@ require 'rails_helper'
 describe 'admin invoice show page' do
   before :each do 
     @invoice = FactoryBot.create_list(:invoice, 3)
+
+    @merchant = FactoryBot.create(:merchant)
+    @customer = FactoryBot.create(:customer)
+    @invoice1 = @customer.invoices.create!( status: 1) 
+    @item_1 = @merchant.items.create!(name: "water bottle", description: "24oz metal container for water", unit_price: 8) 
+    @item_2 = @merchant.items.create!(name: "lamp", description: "12 inch desk lamp", unit_price: 16)
+    @invoice_item_1 = InvoiceItem.create!(item_id: @item_1.id, invoice_id: @invoice1.id, quantity: 11, unit_price: @item_1.unit_price, status: 1)
+    @invoice_item_2 = InvoiceItem.create!(item_id: @item_2.id, invoice_id: @invoice1.id, quantity: 12, unit_price: @item_2.unit_price, status: 1)
   end
 
   describe 'user story 32' do
@@ -17,6 +25,16 @@ describe 'admin invoice show page' do
         expect(page).to have_content(@invoice[1].date)
         expect(page).to have_content(@invoice[1].customer_name)
       end  
+    end
+  end
+
+  describe 'user story 35' do 
+    it ' displays the total revenue that will be generated from the invoice' do 
+      visit "/admin/invoices/#{@invoice1.id}" 
+
+      within(".invoices_info") do 
+        expect(page).to have_content("Total Revenue: $280.00")
+      end
     end
   end
 end    
