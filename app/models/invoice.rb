@@ -17,8 +17,4 @@ class Invoice < ApplicationRecord
   def customer_name
     customer.name
   end
-
-  # def status
-  #   invoice.status.capitalize
-  # end
 end 
