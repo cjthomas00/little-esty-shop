@@ -17,4 +17,12 @@ class Item < ApplicationRecord
     .where(items: {merchant_id: merchant_id})
     .order('invoices.created_at')
   end
+
+  def self.enabled_items
+   where(status: 1)
+  end
+
+  def self.disabled_items
+    where(status: 0)
+  end
 end
