@@ -5,4 +5,12 @@ class Invoice < ApplicationRecord
   has_many :items, through: :invoice_items
 
   enum status: ["completed", "in progress", "cancelled"]
-end
+
+  def self.incomplete_invoices
+    joins(:invoice_items).order(created_at: :asc).where.not(status: 2).distinct
+  end
+
+  def date
+    created_at.strftime("%A, %B %d, %Y")
+  end
+end 

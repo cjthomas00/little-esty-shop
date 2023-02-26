@@ -4,4 +4,3 @@ FactoryBot.define do
     last_name { Faker::Name.last_name }
   end
 end
-
