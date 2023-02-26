@@ -33,11 +33,11 @@ RSpec.describe Item do
     @invoice9 = @customer5.invoices.create!( status: 1) 
     @invoice10 = @customer6.invoices.create!( status: 1) 
     @invoice11 = @customer6.invoices.create!( status: 1) 
-    @item1 = @merchant1.items.create!(name: "Yeti bottle", description: "24oz metal container for water", unit_price: 48) 
-    @item2 = @merchant1.items.create!(name: "football", description: "toy for kids", unit_price: 45) 
-    @item3 = @merchant1.items.create!(name: "lamp shade", description: "12 inch desk lamp", unit_price: 18) 
-    @item4 = @merchant1.items.create!(name: "wireless keyboard", description: "wireless computer keyboard for mac", unit_price: 40) 
-    @item5 = @merchant1.items.create!(name: "chapstick", description: "original flavor chapstick", unit_price: 2) 
+    @item1 = @merchant1.items.create!(name: "Yeti bottle", description: "24oz metal container for water", unit_price: 48, status: 1) 
+    @item2 = @merchant1.items.create!(name: "football", description: "toy for kids", unit_price: 45, status: 1) 
+    @item3 = @merchant1.items.create!(name: "lamp shade", description: "12 inch desk lamp", unit_price: 18, status: 0) 
+    @item4 = @merchant1.items.create!(name: "wireless keyboard", description: "wireless computer keyboard for mac", unit_price: 40, status: 1) 
+    @item5 = @merchant1.items.create!(name: "chapstick", description: "original flavor chapstick", unit_price: 2, status: 0) 
     @transaction1 = @invoice1.transactions.create!(  credit_card_number: 4654405418249632, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") 
     @transaction2 = @invoice2.transactions.create!(  credit_card_number: 4654405418249632, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") 
     @transaction3 = @invoice3.transactions.create!(  credit_card_number: 4140149827486249, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") 
@@ -62,6 +62,14 @@ RSpec.describe Item do
 
     it '::ready_to_ship(merchant_id)' do
       expect(Item.ready_to_ship(@merchant1.id)).to eq([@item1, @item1, @item3])
+    end
+
+    it '::enabled_items' do
+      expect(Item.enabled_items).to eq([@item1, @item2, @item4])
+    end
+
+    it '::disabled_items' do
+      expect(Item.disabled_items).to eq([@item3, @item5])
     end
   end
 end
