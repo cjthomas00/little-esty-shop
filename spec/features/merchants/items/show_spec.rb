@@ -15,12 +15,12 @@ RSpec.describe 'Merchant items index', type: :feature do
       @item8 = @merchant2.items.create!(name: "Window Covering", description: "Window blinds", unit_price: 18) 
       @item9 = @merchant2.items.create!(name: "Wired Mouse", description: "A mouse for a PC", unit_price: 20) 
       @item10 = @merchant2.items.create!(name: "Bubble Gum", description: "original flavor bubble gum", unit_price: 2)
-      visit "/merchant/#{@merchant1.id}/items/#{@item1.id}"
+      visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
     end
     describe "When I click on the name of an item from the merchant items index page, then I am taken to that merchant's item's show page (/merchants/merchant_id/items/item_id)" do
       #user story 7 
       it "And I see all of the item's attributes including: - Name - Description - Current Selling Price" do
-        expect(current_path).to eq("/merchant/#{@merchant1.id}/items/#{@item1.id}")       
+        expect(current_path).to eq("/merchants/#{@merchant1.id}/items/#{@item1.id}")       
         expect(page).to have_content(@item1.name)
         expect(page).to have_content("Description - #{@item1.description}")
         expect(page).to have_content("Current Selling Price - $#{@item1.unit_price}")
@@ -34,7 +34,7 @@ RSpec.describe 'Merchant items index', type: :feature do
       it "I see a link to update the item information." do
         expect(page).to have_link("Update Item")
         click_link("Update Item")
-        expect(current_path).to eq("/merchant/#{@merchant1.id}/items/#{@item1.id}/edit")
+        expect(current_path).to eq("/merchants/#{@merchant1.id}/items/#{@item1.id}/edit")
       end
     end
   end

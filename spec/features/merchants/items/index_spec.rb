@@ -15,7 +15,7 @@ RSpec.describe 'Merchant items index', type: :feature do
       @item8 = @merchant2.items.create!(name: "Window Covering", description: "Window blinds", unit_price: 18) 
       @item9 = @merchant2.items.create!(name: "Wired Mouse", description: "A mouse for a PC", unit_price: 20) 
       @item10 = @merchant2.items.create!(name: "Bubble Gum", description: "original flavor bubble gum", unit_price: 2)
-      visit "/merchant/#{@merchant1.id}/items"
+      visit "/merchants/#{@merchant1.id}/items"
     end
     describe "When I visit my merchant items index page (merchants/merchant_id/items)" do
       #user story 6
@@ -48,7 +48,21 @@ RSpec.describe 'Merchant items index', type: :feature do
         expect(page).to have_no_link("#{@item9.name}")
         expect(page).to have_no_link("#{@item10.name}")
         click_link("#{@item1.name}") 
-        expect(current_path).to eq("/merchant/#{@merchant1.id}/items/#{@item1.id}")
+        expect(current_path).to eq(merchant_item_path(@merchant1, @item1))
+      end
+    end
+
+    #user story 9
+    describe "When I visit my items index page next to each item name I see a button to disable or enable that item" do
+      it "When I click this button then I am redirected back to the items index and I see that the items status has changed" do
+        within "#item_id-#{@item1.id}" do
+        expect(page).to have_content("Item Status: Disabled")
+        expect(page).to have_button("Disable")
+        expect(page).to have_button("Enable")
+        click_button("Enable #{@item1.name}")
+        expect(page).to have_content("Item Status: Enabled")
+        end
+        expect(current_path).to eq(merchant_items_path(@merchant1))
       end
     end
   end
