@@ -15,7 +15,7 @@ RSpec.describe 'Merchant items index', type: :feature do
       @item8 = @merchant2.items.create!(name: "Window Covering", description: "Window blinds", unit_price: 18, status: 1) 
       @item9 = @merchant2.items.create!(name: "Wired Mouse", description: "A mouse for a PC", unit_price: 20, status: 0) 
       @item10 = @merchant2.items.create!(name: "Bubble Gum", description: "original flavor bubble gum", unit_price: 2, status: 1)
-      visit "/merchants/#{@merchant1.id}/items"
+      visit merchant_items_path(@merchant1)
     end
     describe "When I visit my merchant items index page (merchants/merchant_id/items)" do
       #user story 6
@@ -95,6 +95,13 @@ RSpec.describe 'Merchant items index', type: :feature do
      describe "When I visit my items index page" do
       it "I see a link to create a new item." do
         expect(page).to have_link("New Item")
+      end
+    end
+
+    #user story 12
+    describe "When I visit my items index page" do
+      it "Then I see the names of the top 5 most popular items ranked by total revenue generated And I see that each item name links to my merchant item show page for that item And I see the total revenue generated next to each item name " do
+        expect(page).to have_content("Top 5 Most Popular Items")
       end
     end
   end
