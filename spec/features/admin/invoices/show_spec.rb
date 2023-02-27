@@ -37,4 +37,34 @@ describe 'admin invoice show page' do
       end
     end
   end
+
+  describe 'user story 36 - Update Invoice Status' do 
+    it 'has the invoice status as a select field, with current status selected' do 
+      visit "/admin/invoices/#{@invoice1.id}" 
+      # save_and_open_page
+
+      within(".select_status") do 
+        # choose('completed')
+        expect(page).to have_content("completed")
+        expect(page).to have_content("in progress")
+        expect(page).to have_content("cancelled")
+
+      end
+    end
+
+    it 'can select a new status for the Invoice, and has a button to update invoice status' do 
+      visit "/admin/invoices/#{@invoice1.id}" 
+
+        within(".select_status") do 
+          choose('completed')
+          click_button("Update Invoice Status") 
+        end
+        
+      expect(current_path).to eq("/admin/invoices/#{@invoice1.id}")
+    end
+
+    it 'after clicking button, it redirects to invoice show page, and shows the new status' do 
+      visit "/admin/invoices/#{@invoice1.id}" 
+    end
+  end
 end    
