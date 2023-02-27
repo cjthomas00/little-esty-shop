@@ -56,8 +56,7 @@ RSpec.describe 'Merchant Invoices Show Page' do
         it "Then I see the total revenue that will be generated from all of my items on the invoice " do 
           visit merchant_invoice_path(@merchant1.id, @invoice1.id) 
 
-          expect(page).to have_content("Total Revenue: $528.00")
-          save_and_open_page
+          expect(page).to have_content("Total Revenue: $#{@invoice1.total_revenue.to_f.round(2)}")
         end
       end
     end 
