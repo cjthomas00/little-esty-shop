@@ -27,7 +27,7 @@ RSpec.describe 'Merchant Invoices Show Page' do
         expect(page).to have_content("Customer:")
         expect(page).to have_content("#{@customer1.first_name + " " + @customer1.last_name}")
       end
-       # User Story 16
+      # User Story 16
       describe "Then I see all of my items on the invoice including:" do
         it "The items name, quantity ordered, price sold for, and Invoice Item status" do
           visit merchant_invoice_path(@merchant1.id, @invoice1.id) 
@@ -50,6 +50,14 @@ RSpec.describe 'Merchant Invoices Show Page' do
             expect(page).to_not have_content("Price: $84.00")
             expect(page).to_not have_content("Status: #{@invoice2.invoice_items.first.status}")
           end 
+        end
+
+        # use Story 17
+        it "Then I see the total revenue that will be generated from all of my items on the invoice " do 
+          visit merchant_invoice_path(@merchant1.id, @invoice1.id) 
+
+          expect(page).to have_content("Total Revenue: $528.00")
+          save_and_open_page
         end
       end
     end 
