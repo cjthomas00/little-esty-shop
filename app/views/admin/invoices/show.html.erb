@@ -10,7 +10,7 @@
     </div> 
  </section> 
 
- <section>
+  <section>
   <div class = "invoices_item_info">
     <h2>Items on this invoice:</h2>
       <% @all_inv_items.each do |inv_item| %>
@@ -21,3 +21,18 @@
       <% end %>
     </div> 
  </section> 
+ 
+ <section>
+  <div class = "select_status">
+    <%= form_with model: @invoice, url: admin_invoice_path(@invoice), local: true do |form| %>
+      <strong><%=form.label "Status" %><br></strong>
+ 
+      <%=form.radio_button :status, "completed" %> completed <br> 
+      <%=form.radio_button :status, "in progress" %> in progress <br>
+      <%=form.radio_button :status, "cancelled" %> cancelled <br>
+      
+      <%= form.button "Update Invoice Status"%>
+    <% end %>
+  </div>
+ </section>
+
