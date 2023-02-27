@@ -38,6 +38,11 @@ RSpec.describe Item do
     @item3 = @merchant1.items.create!(name: "lamp shade", description: "12 inch desk lamp", unit_price: 18, status: 0) 
     @item4 = @merchant1.items.create!(name: "wireless keyboard", description: "wireless computer keyboard for mac", unit_price: 40, status: 1) 
     @item5 = @merchant1.items.create!(name: "chapstick", description: "original flavor chapstick", unit_price: 2, status: 0) 
+    @item6 = @merchant1.items.create!(name: "Arctic bottle", description: "24oz metal container for water", unit_price: 48, status: 1) 
+    @item7 = @merchant1.items.create!(name: "Basketball", description: "toy for kids", unit_price: 45, status: 0) 
+    @item8 = @merchant1.items.create!(name: "Window Covering", description: "Window blinds", unit_price: 18, status: 1) 
+    @item9 = @merchant1.items.create!(name: "Wired Mouse", description: "A mouse for a PC", unit_price: 20, status: 0) 
+    @item10 = @merchant1.items.create!(name: "Bubble Gum", description: "original flavor bubble gum", unit_price: 2, status: 1)
     @transaction1 = @invoice1.transactions.create!(  credit_card_number: 4654405418249632, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") 
     @transaction2 = @invoice2.transactions.create!(  credit_card_number: 4654405418249632, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") 
     @transaction3 = @invoice3.transactions.create!(  credit_card_number: 4140149827486249, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") 
@@ -54,22 +59,26 @@ RSpec.describe Item do
     InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice1.id, quantity: 11, unit_price: @item1.unit_price, status: 1)
     InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice3.id, quantity: 12, unit_price: @item1.unit_price, status: 1)
     InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice5.id, quantity: 21, unit_price: @item2.unit_price, status: 2)
-    InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice7.id, quantity: 111, unit_price: @item3.unit_price, status: 1)
-    InvoiceItem.create!(item_id: @item4.id, invoice_id: @invoice9.id, quantity: 31, unit_price: @item4.unit_price, status: 0)
-    InvoiceItem.create!(item_id: @item5.id, invoice_id: @invoice11.id, quantity: 13, unit_price: @item1.unit_price, status: 0)
+    InvoiceItem.create!(item_id: @item7.id, invoice_id: @invoice7.id, quantity: 111, unit_price: @item3.unit_price, status: 1)
+    InvoiceItem.create!(item_id: @item6.id, invoice_id: @invoice9.id, quantity: 31, unit_price: @item4.unit_price, status: 0)
+    InvoiceItem.create!(item_id: @item8.id, invoice_id: @invoice11.id, quantity: 13, unit_price: @item1.unit_price, status: 0)
     InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice2.id, quantity: 1, unit_price: @item2.unit_price, status: 2)
     end
 
     it '::ready_to_ship(merchant_id)' do
-      expect(Item.ready_to_ship(@merchant1.id)).to eq([@item1, @item1, @item3])
+      expect(Item.ready_to_ship(@merchant1.id)).to eq([@item1, @item1, @item7])
     end
 
     it '::enabled_items' do
-      expect(Item.enabled_items).to eq([@item1, @item2, @item4])
+      expect(Item.enabled_items).to eq([@item1, @item2, @item4, @item6, @item8, @item10])
     end
 
     it '::disabled_items' do
-      expect(Item.disabled_items).to eq([@item3, @item5])
+      expect(Item.disabled_items).to eq([@item3, @item5, @item7, @item9])
+    end
+
+    it '::top_5_items' do
+      expect(Item.top_5_items).to eq([@item7, @item6, @item1, @item2, @item8])
     end
   end
 end
