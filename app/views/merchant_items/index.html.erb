@@ -30,9 +30,9 @@
 <div class = 'top_5_items' >
   <h2>Top 5 Most Popular Items</h2>
     <ul>
-    <%@merchant.top_5_customers_by_transaction.each do |customer|%>
-    <div id= 'top_5_items-<%=customer.id%>'>
-      <li><%= customer.first_name %> <% ' ' %> <%= customer.last_name %> <% ' ' %>: <%= @merchant.successful_customer_transactions(customer.id) %></li>
+    <%@item.top_5_items.each do |item|%>
+    <div id= 'top_5_items-<%=item.id%>'>
+      <li><%= link_to item.name, merchant_item_path(@merchant, item)%> Total Revenue Generated: <% ' ' %> $<%=item.total_revenue. %></li>
       <%end%>
       </ul>
     </div>
