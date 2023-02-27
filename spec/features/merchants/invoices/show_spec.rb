@@ -58,6 +58,25 @@ RSpec.describe 'Merchant Invoices Show Page' do
 
           expect(page).to have_content("Total Revenue: $#{@invoice1.total_revenue.to_f.round(2)}")
         end
+        # user Story 18
+        describe "I see that each invoice item status is a select field" do
+          describe "And I see that the invoice item's current status is selected" do
+            describe "When I click this select field, I can select a new Status" do
+              it "And I can click 'Update Status' and see that the item's status is updated" do
+                visit merchant_invoice_path(@merchant1.id, @invoice1.id) 
+                
+                within "#item-" do 
+                  expect(page).to have_select("status", selected: "pending")
+                  select("Shipped", for: "status")
+                  click_button "Update Item Status"
+                end
+
+                expect(current_path).to eq(merchant_invoice_path(@merchant1.id, @invoice1.id))
+                expect(page).to have_content("Status: shipped")
+              end
+            end
+          end
+        end
       end
     end 
   end 

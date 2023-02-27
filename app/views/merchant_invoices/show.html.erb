@@ -19,5 +19,10 @@
     <p>Units: <%=invoice_item.quantity%>
     <p>Price: <%=number_to_currency(invoice_item.unit_price)%>
     <p>Status: <%=invoice_item.status%>
+    <%= form_with modle: @invoice, method: :path, local:true do |f| %>
+      <%= f.label :status %>
+      <%= f.select :status, options_for_select([[:packaged, "packaged"], [:pending, "pending"], [:shipped, "shipped"]], invoice_item.status) %>
+      <%= f.submit "Update Itme Status" %>
+    <%end%>
   </div>
 <%end%>
