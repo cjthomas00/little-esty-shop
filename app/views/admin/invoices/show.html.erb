@@ -6,6 +6,7 @@
       <p>Status: <%= @invoice.status.capitalize %></p><br>
       <p>Created on: <%= @invoice.date %></p><br>
       <p>Customer: <%= @invoice.customer_name %></p><br>
+      <p>Total Revenue: $<%= number_with_precision((@invoice.total_revenue).to_f, precision: 2)%></p><br>
     </div> 
  </section> 
 
