@@ -29,11 +29,16 @@ RSpec.describe Merchant, type: :model do
     @invoice9 = @customer5.invoices.create!( status: 1) 
     @invoice10 = @customer6.invoices.create!( status: 1) 
     @invoice11 = @customer6.invoices.create!( status: 1) 
-    @item1 = @merchant1.items.create!(name: "water bottle", description: "24oz metal container for water", unit_price: 8) 
-    @item2 = @merchant1.items.create!(name: "rubber duck", description: "toy for bath", unit_price: 1) 
-    @item3 = @merchant1.items.create!(name: "lamp", description: "12 inch desk lamp", unit_price: 16) 
-    @item4 = @merchant1.items.create!(name: "wireless mouse", description: "wireless computer mouse for mac", unit_price: 40) 
-    @item5 = @merchant1.items.create!(name: "chapstick", description: "coconut flavor chapstick", unit_price: 2) 
+    @item1 = @merchant1.items.create!(name: "Yeti bottle", description: "24oz metal container for water", unit_price: 48, status: 1) 
+    @item2 = @merchant1.items.create!(name: "Football", description: "toy for kids", unit_price: 45, status: 1) 
+    @item3 = @merchant1.items.create!(name: "Lamp shade", description: "12 inch desk lamp", unit_price: 18, status: 1) 
+    @item4 = @merchant1.items.create!(name: "Wireless keyboard", description: "wireless computer keyboard for mac", unit_price: 40, status: 0) 
+    @item5 = @merchant1.items.create!(name: "Chapstick", description: "original flavor chapstick", unit_price: 2, status: 0)
+    @item6 = @merchant1.items.create!(name: "Arctic bottle", description: "24oz metal container for water", unit_price: 48, status: 1) 
+    @item7 = @merchant1.items.create!(name: "Basketball", description: "toy for kids", unit_price: 45, status: 0) 
+    @item8 = @merchant1.items.create!(name: "Window Covering", description: "Window blinds", unit_price: 18, status: 1) 
+    @item9 = @merchant1.items.create!(name: "Wired Mouse", description: "A mouse for a PC", unit_price: 20, status: 0) 
+    @item10 = @merchant1.items.create!(name: "Bubble Gum", description: "original flavor bubble gum", unit_price: 2, status: 1)
     @transaction1 = @invoice1.transactions.create!(  credit_card_number: 4626585418249632, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") 
     @transaction2 = @invoice2.transactions.create!(  credit_card_number: 4626585418249632, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") 
     @transaction3 = @invoice3.transactions.create!(  credit_card_number: 4178259827486249, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success") 
@@ -51,14 +56,14 @@ RSpec.describe Merchant, type: :model do
     InvoiceItem.create!(item_id: @item1.id, invoice_id: @invoice3.id, quantity: 12, unit_price: @item1.unit_price, status: 1)
     InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice5.id, quantity: 21, unit_price: @item2.unit_price, status: 1)
     InvoiceItem.create!(item_id: @item3.id, invoice_id: @invoice7.id, quantity: 111, unit_price: @item3.unit_price, status: 1)
-    InvoiceItem.create!(item_id: @item4.id, invoice_id: @invoice9.id, quantity: 31, unit_price: @item4.unit_price, status: 1)
+    InvoiceItem.create!(item_id: @item6.id, invoice_id: @invoice9.id, quantity: 31, unit_price: @item4.unit_price, status: 1)
     InvoiceItem.create!(item_id: @item5.id, invoice_id: @invoice11.id, quantity: 13, unit_price: @item1.unit_price, status: 1)
     InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice2.id, quantity: 1, unit_price: @item2.unit_price, status: 1)
     end
     
-    it 'top_5_customers_by_transaction' do
-      expect(@merchant1.top_5_customers_by_transaction).to eq([@customer1, @customer2, @customer3, @customer5, @customer6])
-    end
+      it 'top_5_customers_by_transaction' do
+        expect(@merchant1.top_5_customers_by_transaction).to eq([@customer1, @customer2, @customer3, @customer5, @customer6])
+      end
   end
 
   describe "::enabled_merchants" do 
