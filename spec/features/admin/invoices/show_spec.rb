@@ -48,14 +48,14 @@ describe 'admin invoice show page' do
   describe 'user story 34' do
     it 'displays all of the items on the invoice including the name, quantity, price, and status' do
       # visit admin_invoices_path(@invoice[1].id)
-      visit "/admin/invoices/#{@invoice[1].id}"
-      save_and_open_page
+      visit "/admin/invoices/#{@invoice1.id}"
+      
       within(".invoices_item_info") do
-
-        expect(page).to have_content(@invoice_item1.item.name)
-        expect(page).to have_content(@invoice_item1.quantity)
-        expect(page).to have_content(@invoice_item.item.unit_price)
-        expect(page).to have_content(@invoice_item.status.capitalize)
+      # save_and_open_page
+        expect(page).to have_content("Item Name: #{@invoice_item_1.item.name}")
+        expect(page).to have_content("Quantity: #{@invoice_item_1.quantity}")
+        expect(page).to have_content("Price: $#{@invoice_item_1.unit_price.to_f}")
+        expect(page).to have_content("Status: #{@invoice_item_1.status.capitalize}")
       end  
     end
   end
