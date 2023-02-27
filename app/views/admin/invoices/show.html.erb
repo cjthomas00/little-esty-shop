@@ -13,9 +13,9 @@
  <section>
   <div class = "select_status">
     <%= form_with model: @invoice, url: admin_invoice_path(@invoice), local: true do |form| %>
-      <%=form.label "Status" %><br>
+      <strong><%=form.label "Status" %><br></strong>
  
-      <%=form.radio_button :status, "completed" %> completed <br>
+      <%=form.radio_button :status, "completed" %> completed <br> 
       <%=form.radio_button :status, "in progress" %> in progress <br>
       <%=form.radio_button :status, "cancelled" %> cancelled <br>
       
