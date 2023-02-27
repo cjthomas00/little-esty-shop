@@ -13,10 +13,9 @@
  <section>
   <div class = "invoices_item_info">
     <h2>Items on this invoice:</h2>
-      <% @invoice.invoice_items.each do |inv_item| %>
-        <%# require 'pry'; binding.pry %>
+      <% @inv_items.each do |inv_item| %>
         <% end %>
-      <p>Item Name: <%= @inv_item.item.name %></p><br>
+      <p>Item Name: <%= @inv_item.name %></p><br>
       <p>Quantity: <%= @inv_item.quantity %></p><br>
       <p>Status: <%= @inv_item.status.capitalize %></p><br>
       <p>Created on: <%= @inv_item.date %></p><br>
