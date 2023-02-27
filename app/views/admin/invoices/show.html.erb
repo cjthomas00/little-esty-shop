@@ -10,6 +10,18 @@
     </div> 
  </section> 
 
+  <section>
+  <div class = "invoices_item_info">
+    <h2>Items on this invoice:</h2>
+      <% @all_inv_items.each do |inv_item| %>
+      <p>Item Name: <%= inv_item.item.name %></p>
+      <p>Quantity: <%= inv_item.quantity %></p>
+      <p>Price: <%= number_to_currency(inv_item.unit_price) %></p>
+      <p>Status: <%= inv_item.status.capitalize %></p><br>
+      <% end %>
+    </div> 
+ </section> 
+ 
  <section>
   <div class = "select_status">
     <%= form_with model: @invoice, url: admin_invoice_path(@invoice), local: true do |form| %>
@@ -23,3 +35,4 @@
     <% end %>
   </div>
  </section>
+

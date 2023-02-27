@@ -4,11 +4,11 @@ class Admin::InvoicesController < ApplicationController
   end
 
   def show
-   @invoice = Invoice.find(params[:id])
+    @invoice = Invoice.find(params[:id])
+    @all_inv_items = @invoice.invoice_items
   end
 
-  def update 
-    # require 'pry'; binding.pry
+  def update
     invoice = Invoice.find(params[:id])
     invoice.update!(update_status)
     redirect_to "/admin/invoices/#{invoice.id}"
@@ -20,3 +20,6 @@ class Admin::InvoicesController < ApplicationController
     params.require(:invoice).permit(:status)
   end
 end
+
+ 
+
