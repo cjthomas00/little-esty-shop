@@ -32,7 +32,7 @@
     <ul>
     <%@item.top_5_items.each do |item|%>
     <div id= 'top_5_items-<%=item.id%>'>
-      <li><%= link_to item.name, merchant_item_path(@merchant, item)%> Total Revenue Generated: <% ' ' %> $<%=item.total_revenue. %></li>
+      <li><%= link_to item.name, merchant_item_path(@merchant, item)%> Total Revenue Generated: <% ' ' %> $<%=item.total_revenue %></li>
       <%end%>
       </ul>
     </div>
