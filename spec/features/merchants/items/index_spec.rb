@@ -143,11 +143,20 @@ RSpec.describe 'Merchant items index', type: :feature do
           expect(@item4.name).to appear_before(@item1.name)
           expect(@item1.name).to appear_before(@item2.name)
           expect(@item2.name).to appear_before(@item5.name)
-          expect(page).to have_content("#{@item3.name} Total Revenue Generated: $1998")
-          expect(page).to have_content("#{@item4.name} Total Revenue Generated: $1240")
-          expect(page).to have_content("#{@item1.name} Total Revenue Generated: $1104")
-          expect(page).to have_content("#{@item2.name} Total Revenue Generated: $990")
-          expect(page).to have_content("#{@item5.name} Total Revenue Generated: $624")
+          expect(page).to have_content("#{@item3.name} Total Revenue Generated: $1,998.00")
+          expect(page).to have_content("#{@item4.name} Total Revenue Generated: $1,240.00")
+          expect(page).to have_content("#{@item1.name} Total Revenue Generated: $1,104.00")
+          expect(page).to have_content("#{@item2.name} Total Revenue Generated: $990.00")
+          expect(page).to have_content("#{@item5.name} Total Revenue Generated: $624.00")
+        end
+      end
+    end
+
+    #user story 13
+    describe "When I visit my items index page" do
+      it "Then next to each of the 5 most popular items I see the date with the most sales for each item. And I see a label 'Top selling date for <item name> was <date with most sales>'" do
+        within(".top_5_items")  do 
+          expect(page).to have_content("Top selling date for #{@item3.name} was #{@item3.invoice_items.top_sales_date.strftime("%A, %B %d, %Y")}")
         end
       end
     end

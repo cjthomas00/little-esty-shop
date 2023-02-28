@@ -130,6 +130,10 @@ RSpec.describe Merchant, type: :model do
         expect(@merchant1.total_revenue).to eq(7954)
         expect(@merchant2.total_revenue).to eq(792)
       end
+
+      it 'top_5_items' do
+        expect(@merchant1.top_5_items).to eq([@item3, @item6, @item1, @item2, @item5])
+      end
     end
 
   describe "::enabled_merchants" do 
