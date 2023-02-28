@@ -31,4 +31,8 @@ class Merchant < ApplicationRecord
       .order('total_rev desc')
       .limit(5)
   end
+
+  def total_revenue 
+    transactions.sum('(invoice_items.quantity*invoice_items.unit_price)')
+  end
 end

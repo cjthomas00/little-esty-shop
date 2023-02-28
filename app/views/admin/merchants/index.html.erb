@@ -39,5 +39,14 @@
     <% end %>
   </div>
 
+  <div class = "top_5_merchants" >
+    <% @merchants.top_5_merchants_by_revenue.each do |merchant| %>
+      <ul>
+        <li><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %></li>
+        <p>Total Revenue: <%= number_to_currency(merchant.total_revenue)%></p><br>
+      </ul>
+    <% end %>  
+  </div>
+
   <%= link_to "Create New Merchant", "/admin/merchants/new"%>
 </div>
