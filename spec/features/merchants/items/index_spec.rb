@@ -143,7 +143,6 @@ RSpec.describe 'Merchant items index', type: :feature do
           expect(@item4.name).to appear_before(@item1.name)
           expect(@item1.name).to appear_before(@item2.name)
           expect(@item2.name).to appear_before(@item5.name)
-          save_and_open_page
           expect(page).to have_content("#{@item3.name} Total Revenue Generated: $1,998.00")
           expect(page).to have_content("#{@item4.name} Total Revenue Generated: $1,240.00")
           expect(page).to have_content("#{@item1.name} Total Revenue Generated: $1,104.00")
