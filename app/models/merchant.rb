@@ -39,4 +39,10 @@ class Merchant < ApplicationRecord
   def top_5_items
     items.top_5_items
   end
+
+  def date_with_most_revenue 
+    invoice_items.top_sales_date
+  end
+
+
 end
