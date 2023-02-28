@@ -156,7 +156,7 @@ RSpec.describe 'Merchant items index', type: :feature do
     describe "When I visit my items index page" do
       it "Then next to each of the 5 most popular items I see the date with the most sales for each item. And I see a label 'Top selling date for <item name> was <date with most sales>'" do
         within(".top_5_items")  do 
-          expect(page).to have_content("Top selling date for #{@item3.name} was #{@item3.invoice_items.top_sales_date.strftime("%m/%d/%Y")} ")
+          expect(page).to have_content("Top selling date for #{@item3.name} was #{@item3.invoice_items.top_sales_date.strftime("%A, %B %d, %Y")}")
         end
       end
     end
