@@ -35,4 +35,8 @@ class Merchant < ApplicationRecord
   def total_revenue 
     transactions.sum('(invoice_items.quantity*invoice_items.unit_price)')
   end
+
+  def top_5_items
+    items.top_5_items
+  end
 end
