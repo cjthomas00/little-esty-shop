@@ -64,11 +64,10 @@ RSpec.describe 'Merchant Invoices Show Page' do
             describe "When I click this select field, I can select a new Status" do
               it "And I can click 'Update Status' and see that the item's status is updated" do
                 visit merchant_invoice_path(@merchant1.id, @invoice1.id) 
-                require 'pry'; binding.pry
-               
+                
                 within "#item-" do 
-                  expect(page).to have_select("invoice[status]", selected: "packaged")
-                  select("shipped", from: "invoice_status")
+                  expect(page).to have_select("invoice_items[status]", selected: "packaged")
+                  select("shipped", from: "invoice_items[status]")
                   click_button "Update Item Status"
                 end
 
