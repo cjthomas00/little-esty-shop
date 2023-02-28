@@ -244,4 +244,29 @@ RSpec.describe "Admin Mercnahts Index" do
       end
     end
   end
+  describe 'user-story-31' do 
+    it 'has the the date with most revenue for each merchant' do 
+
+    visit "/admin/merchants" 
+    # save_and_open_page
+
+        merchant1 = Merchant.create!( name: "Dudes Habidashery")
+        customer1 = Customer.create!( first_name: "Britney", last_name: "Johnson")
+        invoice1 = customer1.invoices.create!( status: 1) 
+        invoice2 = customer1.invoices.create!( status: 0) 
+        item1 = merchant1.items.create!(name: "water bottle", description: "24oz metal container for water", unit_price: 8) 
+        item2 = merchant1.items.create!(name: "rubber duck", description: "toy for bath", unit_price: 1) 
+        transaction1 = invoice1.transactions.create!(  credit_card_number: 4654405418249632, credit_card_expiration_date: Date.new(2024, 1, 3), result: "success")
+        transaction2 = invoice1.transactions.create!(  credit_card_number: 4654405418249632, credit_card_expiration_date: Date.new(2024, 1, 3), result: "failed")
+        invoice_item_1 = InvoiceItem.create!(item_id: item1.id, invoice_id: invoice1.id, quantity: 11, unit_price: item1.unit_price, status: 0)
+        invoice_item_2 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice1.id, quantity: 12, unit_price: item2.unit_price, status: 1)
+        invoice_item_3 = InvoiceItem.create!(item_id: item2.id, invoice_id: invoice1.id, quantity: 12, unit_price: item2.unit_price, status: 2)
+       
+        expect(merchant1.date_with_most_revenue).to eq(invoice1.created_at)
+
+      within(".top_5_merchants") do 
+        expect(page).to have_content("Top selling date for #{merchant1.name} was #{merchant1.date_with_most_revenue.strftime("%A, %B %d, %Y")}")
+      end
+    end
+  end
 end
