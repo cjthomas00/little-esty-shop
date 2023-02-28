@@ -122,6 +122,11 @@ RSpec.describe Merchant, type: :model do
         expect(@merchant1.top_5_customers_by_transaction).to eq([@customer2, @customer3, @customer5, @customer1, @customer6])
       end
 
+      it "successful_customer_transactions(customer_id)" do
+        expect(@merchant1.successful_customer_transactions(@customer1.id)).to eq(2)
+        expect(@merchant1.successful_customer_transactions(@customer1.id)).to_not eq(22)
+      end
+
       it 'is the top 5 merchants by revenue' do 
         expect(Merchant.top_5_merchants_by_revenue).to eq([@merchant1, @merchant4, @merchant5, @merchant6, @merchant2])
       end
