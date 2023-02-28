@@ -3,8 +3,9 @@
 
 <h3><center>Invoice #<%=@invoice.id%><center></h3>
 <p>Status: <%=@invoice.status%></p>
-<p>Created on: <%=@invoice.created_at.strftime("%A, %B %d, %Y")%>
 <br>
+<p>Created on: <%=@invoice.created_at.strftime("%A, %B %d, %Y")%>
+<p>Total Revenue: <%=number_to_currency(@invoice.total_revenue)%></p>
 
 <h2>Customer:</h2>
 <p><%=@invoice.customer.first_name%> <%=@invoice.customer.last_name%>
@@ -18,5 +19,11 @@
     <p>Units: <%=invoice_item.quantity%>
     <p>Price: <%=number_to_currency(invoice_item.unit_price)%>
     <p>Status: <%=invoice_item.status%>
+    <%= form_with model: @invoice, url: merchant_invoice_path(@merchant, @invoice), method: :patch, local: true, scope: :invoice_items do |f| %>
+      <%= f.hidden_field :invoice_item, value: invoice_item.id %>
+      <%= f.label :status %>
+      <%= f.select :status, options_for_select([[:packaged, "packaged"], [:pending, "pending"], [:shipped, "shipped"]], invoice_item.status) %>
+      <%= f.submit "Update Item Status" %>
+    <%end%>
   </div>
 <%end%>
