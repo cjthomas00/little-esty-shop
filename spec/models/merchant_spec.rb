@@ -24,7 +24,7 @@ RSpec.describe Merchant, type: :model do
       @customer4 = Customer.create!( first_name: "Clark", last_name: "Griswold")
       @customer5 = Customer.create!( first_name: "Nick", last_name: "Green")
       @customer6 = Customer.create!( first_name: "Lyla", last_name: "Thomas")
-      
+
       @invoice1 = @customer1.invoices.create!( status: 1) 
       @invoice2 = @customer1.invoices.create!( status: 1) 
       @invoice3 = @customer2.invoices.create!( status: 1) 
@@ -124,6 +124,11 @@ RSpec.describe Merchant, type: :model do
 
       it 'is the top 5 merchants by revenue' do 
         expect(Merchant.top_5_merchants_by_revenue).to eq([@merchant1, @merchant4, @merchant5, @merchant6, @merchant2])
+      end
+
+      it 'is the total revenue generated for a merchant' do 
+        expect(@merchant1.total_revenue).to eq(7954)
+        expect(@merchant2.total_revenue).to eq(792)
       end
     end
 
