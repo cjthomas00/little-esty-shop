@@ -69,9 +69,8 @@ describe 'admin index page' do
       
         visit admin_path 
         
-
-        expect(page).to have_link("Admin Merchants")
-        expect(page).to have_link("Admin Invoices")
+        expect(page).to have_button("Admin Merchants")
+        expect(page).to have_button("Admin Invoices")
       end
     end
   
