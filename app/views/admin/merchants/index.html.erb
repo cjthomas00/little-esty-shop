@@ -44,6 +44,7 @@
       <ul>
         <li><%= link_to "#{merchant.name}", admin_merchant_path(merchant) %></li>
         <p>Total Revenue: <%= number_to_currency(merchant.total_revenue)%></p><br>
+        <p>Top selling date for <%=merchant.name%> was <%=merchant.date_with_most_revenue.strftime("%A, %B %d, %Y")%></p>
       </ul>
     <% end %>  
   </div>
