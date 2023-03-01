@@ -45,6 +45,14 @@ This project requires Ruby 2.7.4.
 
 <img width="841" alt="Screen Shot 2023-02-22 at 3 14 45 PM (1)" src="https://user-images.githubusercontent.com/113124260/222257880-018a1cf7-cc0c-425b-b053-bf5651d8137d.png">
 
+## Future Refactor 
+
+After having successfully consumed the APIs we were unable to display them in the view.
+
+Further implentation of factory bot for testing.
+
+Styling to optimize user experience. 
+
 ## Author
 
 - [Kara Jones-Hofmann](https://github.com/KaraJoHo)<br>
