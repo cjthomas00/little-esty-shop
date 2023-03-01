@@ -4,7 +4,7 @@ class Invoice < ApplicationRecord
   has_many :invoice_items
   has_many :items, through: :invoice_items
 
-  enum status: ["completed", "in progress", "cancelled"]
+  enum status: [:completed, :in_progress, :cancelled]
 
   def self.incomplete_invoices
     joins(:invoice_items).order(created_at: :asc).where.not(status: 2).distinct

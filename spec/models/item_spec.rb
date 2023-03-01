@@ -80,5 +80,17 @@ RSpec.describe Item do
     it '::top_5_items' do
       expect(Item.top_5_items).to eq([@item7, @item6, @item1, @item2, @item8])
     end
+
+    it 'status can be disabled' do
+      expect(@item3.status).to eq("disabled")
+      expect(@item3.disabled?).to eq(true)
+      expect(@item3.enabled?).to eq(false)
+    end
+    
+    it 'status can be enabled' do    
+      expect(@item1.status).to eq("enabled")
+      expect(@item1.disabled?).to eq(false)
+      expect(@item1.enabled?).to eq(true)
+    end
   end
 end

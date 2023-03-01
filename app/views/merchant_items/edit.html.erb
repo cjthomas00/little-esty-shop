@@ -1,14 +1,5 @@
 <h1> Update <%= @item.name%> </h1>
 
 <div class = "update_item_form">
-  <%= form_with model: @item, url: merchant_item_path(@merchant, @item), method: :patch, local: true do |form| %>
-    <%= form.label :name, "Name" %>
-    <%= form.text_field :name %>
-    <%= form.label :description, "Description" %>
-    <%= form.text_field :description %>
-    <%= form.label :unit_price, "Price" %>
-    <%= form.text_field :unit_price %>
-   
-    <%= form.button "Submit"%>
-  <% end %>
+<%= render partial: "form", locals: {model: @item, url:merchant_item_path(@merchant, @item), method: :patch } %>
 </div>

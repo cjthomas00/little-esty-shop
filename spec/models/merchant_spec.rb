@@ -9,6 +9,10 @@ RSpec.describe Merchant, type: :model do
     it { should have_many(:customers).through(:invoices)}
   end
 
+  describe 'validations' do
+    it {should validate_presence_of :name}
+  end
+
   describe 'Instance Methods' do
     before :each do
       @merchant1 = Merchant.create!( name: "Dudes Habidashery")
