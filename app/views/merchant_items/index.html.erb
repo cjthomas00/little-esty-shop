@@ -33,7 +33,7 @@
           <ul>
           <li> <%=link_to item.name, merchant_item_path(@merchant, item) %></li> 
           <p>Item Status: <%= item.status %></p>
-          <p> <%= button_to "Disable #{item.name}", merchant_item_path(@merchant, item), params: {status: "Disabled"}, method: :patch %></p>
+          <p> <%= button_to "Disable #{item.name}", merchant_item_path(@merchant, item), params: {status: "disabled"}, method: :patch %></p>
           </ul>
         </div>
          <% end %>
@@ -46,7 +46,7 @@
         <ul>
          <li><%=link_to item.name, merchant_item_path(@merchant, item) %></li> 
          <p>Item Status: <%= item.status %></p>
-         <p> <%= button_to "Enable #{item.name}", merchant_item_path(@merchant, item), params: {status: "Enabled"}, method: :patch %></p>
+         <p> <%= button_to "Enable #{item.name}", merchant_item_path(@merchant, item), params: {status: "enabled"}, method: :patch %></p>
         </ul>
     </div>
     <% end %>

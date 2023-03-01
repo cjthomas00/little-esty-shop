@@ -12,7 +12,6 @@ class Admin::MerchantsController < ApplicationController
   end
 
   def create 
-    # require 'pry'; binding.pry
     @merchant = Merchant.create!(new_merchant_attributes)
   end
 

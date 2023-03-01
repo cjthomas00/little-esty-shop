@@ -1,16 +1,5 @@
 <h1>Create New Item </h1>
 
 <div class = "new_item_form">
-<%= form_with model: @item, url: merchant_items_path(@merchant), method: :post, local: true do |form| %>
-<%= form.label :name, "Name:" %>
-    <%= form.text_field :name %>
-    <%= form.label :description, "Description:" %>
-    <%= form.text_field :description %>
-    <%= form.label :unit_price, "Price:" %>
-    <%= form.text_field :unit_price %>
-
-    <%= form.hidden_field :status, value: "Disabled"%>
-   
-    <%= form.button "Submit"%>
-  <% end %>
-  </div>
+  <%= render partial: "form", locals: {model: @item, url:merchant_items_path(@merchant), method: :post } %>
+</div>
