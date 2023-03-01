@@ -1,5 +1,6 @@
+<nav><%= render partial: "./shared/merch_links" %></nav>
 <h1><%= @item.name %></h1>
 <p>Description - <%= @item.description %></p> 
 <p>Current Selling Price - $<%= @item.unit_price %></p> 
 
-<p> <%= link_to "Update Item", "/merchants/#{@merchant.id}/items/#{@item.id}/edit"%></p>
+<p> <%= link_to "Update Item", edit_merchant_item_path(@merchant, @item)%></p>

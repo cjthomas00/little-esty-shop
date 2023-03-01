@@ -1,23 +1,19 @@
-<div class="links">
-  <ul>
+<style>
+    {
+        box-sizing: border-box;
+    }
+    /* Set additional styling options for the columns*/
+    .items_ready_to_ship{
+    float: right;
+    width: 50%;
+    }
+    </style>
+  <%= render partial: "./shared/merch_links" %>
     <h1><%= @merchant.name %>'s Dashbaord</h1>
-    <%= button_to "My Items", "/merchants/#{@merchant.id}/items", method: :get%>
-    <%= button_to "My Invoices", "/merchants/#{@merchant.id}/invoices", method: :get%>
-  </ul>
+<div class="links">
+  <nav>
+  </nav>
 </div>
-
-<section>
-<div class = 'top_5_customers' >
-  <h2>My Favorite Customers</h2>
-    <ul>
-    <%@merchant.top_5_customers_by_transaction.each do |customer|%>
-    <div id= 'top_5_customers-<%=customer.id%>'>
-      <li><%= customer.first_name %> <% ' ' %> <%= customer.last_name %> <% ' ' %>: <%= @merchant.successful_customer_transactions(customer.id) %></li>
-      <%end%>
-      </ul>
-    </div>
-  </div>
-</section>
 
 <section>
   <div class = "items_ready_to_ship">
@@ -27,6 +23,19 @@
     <div id= 'items_ready_to_ship-<%=item.id%>'>
       <li><%= item.name %>: Invoice # <%= link_to item.inv_id,  merchant_invoice_path(@merchant, item.inv_id) %> Created At:   <%=item.date.strftime("%A, %B %d, %Y")%></li>
       <% end %>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+<div class = 'top_5_customers' >
+  <h2>My Favorite Customers</h2>
+    <ul>
+    <%@merchant.top_5_customers_by_transaction.each do |customer|%>
+    <div id= 'top_5_customers-<%=customer.id%>'>
+      <li><%= customer.first_name %> <% ' ' %> <%= customer.last_name %> <% ' ' %>: <%= @merchant.successful_customer_transactions(customer.id) %></li>
+      <%end%>
       </ul>
     </div>
   </div>

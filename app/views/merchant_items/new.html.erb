@@ -1,5 +1,5 @@
+<nav><%= render partial: "./shared/merch_links" %></nav>
 <h1>Create New Item </h1>
-
 <div class = "new_item_form">
   <%= render partial: "form", locals: {model: @item, url:merchant_items_path(@merchant), method: :post } %>
 </div>
