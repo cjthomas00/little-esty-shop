@@ -58,7 +58,7 @@ describe 'admin index page' do
 
     describe 'user story 19' do
       it 'displays a header indicating that visitor is on the admin dashboard' do
-        visit admin_path 
+        visit admin_index_path 
 
         expect(page).to have_content("Admin Dashboard")
       end
@@ -67,7 +67,7 @@ describe 'admin index page' do
     describe 'user story 20' do 
       it 'has links to the admin merchants index and the admin invoices index' do 
       
-        visit admin_path 
+        visit admin_index_path 
         
         expect(page).to have_button("Admin Merchants")
         expect(page).to have_button("Admin Invoices")
@@ -77,7 +77,7 @@ describe 'admin index page' do
     describe 'user story 21' do 
       it 'displays the top 5 customers with the largest number of successful transactions' do 
        
-        visit admin_path 
+        visit admin_index_path 
      
         within "#top_five_customers-#{@customer1.id}" do
           expect(@customer1.first_name).to appear_before(@customer1.last_name)
@@ -97,7 +97,7 @@ describe 'admin index page' do
     describe 'user story 22' do 
       it 'displays a section for Incomplete Invoices' do 
   
-        visit admin_path 
+        visit admin_index_path 
         
         expect(page).to have_content("Incomplete Invoices")
       end
@@ -105,7 +105,7 @@ describe 'admin index page' do
 
     it 'shows a list of the ids of all invoices have items that have not yet been shipped' do
    
-      visit admin_path 
+      visit admin_index_path 
 
       within('.incomplete_invoices') do
         expect(page).to have_content("Invoice ##{@invoice1.id}")
@@ -123,7 +123,7 @@ describe 'admin index page' do
 
       it 'shows each invoice id links to that invoices admin show page' do
         
-        visit admin_path 
+        visit admin_index_path 
     
         within('.incomplete_invoices') do
           expect(page).to have_link("#{@invoice1.id}")
@@ -143,7 +143,7 @@ describe 'admin index page' do
     describe 'user story 23' do 
       it 'shows the date by each invoice id it was created on from oldest to newest' do
       
-        visit admin_path 
+        visit admin_index_path 
 
         within('.incomplete_invoices') do
           expect(page).to have_content("Invoice ##{@invoice7.id} - Friday, February 17, 2023")
