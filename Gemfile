@@ -48,6 +48,8 @@ group :development, :test do
   gem 'shoulda-matchers' # requires add'l setup
   gem 'orderly' # tests order of appearance on webpage
   gem 'net-http'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development do

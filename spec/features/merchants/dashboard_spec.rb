@@ -53,7 +53,6 @@ RSpec.describe 'Merchant Dashboard', type: :feature  do
     describe 'When I visit my merchant dashboard (/merchants/merchant_id/dashboard)' do
       # User story 1
       it "Then I see the name of my merchant " do
-      
         expect(current_path).to eq("/merchants/#{@merchant1.id}/dashboard")
         expect(page).to have_content(@merchant1.name)
       end 

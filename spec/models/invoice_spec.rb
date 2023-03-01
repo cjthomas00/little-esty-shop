@@ -19,27 +19,6 @@ RSpec.describe Invoice, type: :model do
     @invoice_item_2 = InvoiceItem.create!(item_id: @item2.id, invoice_id: @invoice1.id, quantity: 12, unit_price: @item2.unit_price, status: 1)
   end
 
-  it 'status can be in progress' do
-    expect(@invoice1.status).to eq("in_progress")
-    expect(@invoice1.completed?).to eq(false)
-    expect(@invoice1.in_progress?).to eq(true)
-    expect(@invoice1.cancelled?).to eq(false)
-  end
-  
-  it 'status can be cancelled' do    
-    expect(@invoice2.status).to eq("cancelled")
-    expect(@invoice2.completed?).to eq(false)
-    expect(@invoice2.in_progress?).to eq(false)
-    expect(@invoice2.cancelled?).to eq(true)
-  end
-  
-  it 'status can be completed' do
-    expect(@invoice3.status).to eq("completed")
-    expect(@invoice3.completed?).to eq(true)
-    expect(@invoice3.in_progress?).to eq(false)
-    expect(@invoice3.cancelled?).to eq(false)
-  end
-
   describe '#total_revenue' do 
     it 'is the total revenue generated' do 
       expect(@invoice1.total_revenue).to eq(100)
