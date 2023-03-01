@@ -41,3 +41,15 @@ This project requires Ruby 2.7.4.
 1. [Extensions](./doc/extensions.md)
 1. [Evaluation](./doc/evaluation.md)
 
+
+## Schema
+
+<img width="841" alt="Screen Shot 2023-02-22 at 3 14 45 PM (1)" src="https://user-images.githubusercontent.com/113124260/222257880-018a1cf7-cc0c-425b-b053-bf5651d8137d.png">
+
+## Author
+
+- [Kara Jones-Hofmann](https://github.com/KaraJoHo)<br>
+- [Elle Majors](https://github.com/Elle-M)<br>
+- [James Taylor](https://github.com/JTaylor28)<br>
+- [Caleb Thomas](https://github.com/cjthomas00)<br>
+
