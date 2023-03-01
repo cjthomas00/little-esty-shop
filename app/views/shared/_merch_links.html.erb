@@ -1,0 +1,17 @@
+<style>
+    {
+        box-sizing: border-box;
+    }
+    /* Set additional styling options for the columns*/
+    .links{
+    float: right;
+    width: 25%;
+    }
+    </style>
+<div class="links">
+<nav>
+    <%= button_to "My Items", merchant_items_path(@merchant), method: :get%>
+    <%= button_to "My Invoices", merchant_invoices_path(@merchant), method: :get%>
+    <%= button_to "My Dashboard", merchant_dashboard_index_path(@merchant), method: :get%>
+</nav>
+</div>
