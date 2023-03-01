@@ -1,8 +1,14 @@
 require './app/poros/repo_name_search'
 require './app/poros/commits_search'
+require './app/poros/user_names_search'
 
 puts RepoNameSearch.new.repo_name_information.name
 
+puts RepoNameSearch.new.repo_name_information.name
+usernames = UserNamesSearch.new.user_name_information
+  usernames.map do |data|  
+    puts data.user_names
+  end
 
 #===================== COMMITS ======================#
 commits = CommitsSearch.new.commit_information 
@@ -22,4 +28,8 @@ grouped.each do |key, value|
 end
 commits_per_author_hash
 #===================== COMMITS ======================#
+
+
+
+ 
 
