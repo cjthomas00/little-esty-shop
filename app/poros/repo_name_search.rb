@@ -4,9 +4,7 @@ require './app/poros/repo_name'
 
 class RepoNameSearch  
   def repo_name_information  
-    service.repo_name.map do |data|
-    RepoName.new(data)
-    end
+    RepoName.new(service.repo_name)
   end
 
   def service

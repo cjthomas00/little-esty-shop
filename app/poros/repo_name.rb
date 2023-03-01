@@ -1,10 +1,7 @@
 class RepoName 
-  attr_reader :name,
-              :id,
-              :node_id
-
+  attr_reader :name
+  
   def initialize(data)
-    require 'pry'; binding.pry #<=== code breaks here.
     @name = data[:name]
   end
 end

@@ -20,6 +20,7 @@ class GithubRepoService
   def get_url(url) # make a GET request
     # Talking to API
     response = HTTParty.get(url)
-    parsed = JSON.parse(response.body, symbolize_names: true) # ==> converts JSON to Ruby
+    data = response.body
+    parsed = JSON.parse(data, symbolize_names: true) # ==> converts JSON to Ruby
   end
 end
