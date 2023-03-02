@@ -2,7 +2,7 @@ require './app/poros/repo_name_search'
 require './app/poros/commits_search'
 require './app/poros/user_names_search'
 require './app/poros/pull_requests_search'
-require 'pry'
+
 
 class GithubInfo
   attr_reader :repo_name, :user_names, :pull_requests, :commits

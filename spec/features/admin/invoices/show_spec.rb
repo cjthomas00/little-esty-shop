@@ -5,7 +5,7 @@ describe 'admin invoice show page' do
     @invoice = FactoryBot.create_list(:invoice, 3)
     # @item = FactoryBot.create_list(:item, 5)
     # @invoice_item = FactoryBot.create_list(:invoice_item, 3, invoice: @invoice[1], item: @item[1])
-    # require 'pry'; binding.pry
+   
     @merchant = FactoryBot.create(:merchant)
     @customer = FactoryBot.create(:customer)
     @invoice1 = @customer.invoices.create!( status: 1) 

@@ -1,5 +1,4 @@
 require 'httparty'
-require 'pry'
 
 class GithubRepoService
   def repo_name
