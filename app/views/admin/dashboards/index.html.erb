@@ -1,5 +1,27 @@
 <%= render 'admin_nav' %>
 
+ <style>
+    {
+        box-sizing: border-box;
+    }
+    /* Set additional styling options for the columns*/
+    .incomplete_invoices{
+    float: right;
+    width: 50%;
+    }
+  </style>
+     
+<section>
+  <div class = "incomplete_invoices">
+  <h2>Incomplete Invoices</h2>
+    <ul>
+    <% @incomplete_invoices.each do |invoice| %>
+    <li>Invoice #<%= link_to invoice.id %><%= ' - ' %><%= invoice.date %></li> 
+     <% end %>
+    </ul> 
+   </div> 
+</section> 
+ 
 <section>
   <div class = "top_five_customers">
   <h2>Top 5 Customers</h2>
@@ -11,17 +33,3 @@
     </ul> 
    </div> 
  </section> 
-
-   <section>
-  <div class = "incomplete_invoices">
-  <h2>Incomplete Invoices</h2>
-    <ul>
-    <% @incomplete_invoices.each do |invoice| %>
-    <li>Invoice #<%= link_to invoice.id %><%= ' - ' %><%= invoice.date %></li> 
-     <% end %>
-    </ul> 
-   </div> 
- </section> 
-
-
-

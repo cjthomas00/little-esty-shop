@@ -1,5 +1,20 @@
-<h2>Admin Dashboard</h2>
+<style>
+    {
+        box-sizing: border-box;
+    }
 
-<%= button_to  "Admin Dashboard", "/admin", method: :get%>
-<%= button_to  "Admin Merchants", "/admin/merchants", method: :get %>
-<%= button_to "Admin Invoices", "/admin/invoices", method: :get %>
+    .links{
+    float: right;
+    width: 25%;
+    }
+    </style>
+<div class="links">
+<nav>
+    <%= button_to "Admin Dashboard", admin_index_path, method: :get%>
+    <%= button_to "Admin Merchants", admin_merchants_path, method: :get%>
+    <%= button_to "Admin Invoices", admin_invoices_path, method: :get%>
+</nav>
+</div>
+
+<h1>Admin Dashboard</h1>
+
